@@ -1,35 +1,63 @@
+/* Custom Google Fonts */
+body, .wrapper, .content-wrapper {
+    font-family: "Playfair Display", serif !important;
+}
+
+/* Logo/Brand text using Bebas Neue */
+.brand-text, .sidebar .brand-link .brand-text {
+    font-family: "Bebas Neue", sans-serif !important;
+    letter-spacing: 1px;
+}
+
+/* Headings using Bebas Neue */
+h1, h2, h3, h4, h5, h6,
+.card-title {
+    font-family: "Bebas Neue", sans-serif !important;
+    letter-spacing: 0.5px;
+}
+
+/* Signature font for special elements (optional) */
+.signature-text {
+    font-family: "Momo Signature", cursive !important;
+}
+
 /* Custom AdminLTE Sidebar Styles */
 
-/* Active menu item background color */
+/* Active menu item background color - all levels */
+.sidebar-dark-primary .nav-sidebar .nav-item .nav-link.active,
+.sidebar-dark-danger .nav-sidebar .nav-item .nav-link.active,
 .sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active,
 .sidebar-dark-danger .nav-sidebar > .nav-item > .nav-link.active {
-    background-color: #B0212D !important; /* Red color - change this to your preferred color */
+    background-color: #B0212D !important; /* Red color */
     color: #ffffff !important;
 }
 
-/* Hover effect for menu items */
+/* Hover effect for menu items - all levels */
+.sidebar-dark-primary .nav-sidebar .nav-item .nav-link:hover,
+.sidebar-dark-danger .nav-sidebar .nav-item .nav-link:hover,
 .sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link:hover,
 .sidebar-dark-danger .nav-sidebar > .nav-item > .nav-link:hover {
-    background-color: #940111 !important; /* Slightly transparent red */
+    background-color: #940111 !important; /* Darker red on hover */
     color: #ffffff !important;
 }
 
-/* Active submenu item */
-.sidebar-dark-primary .nav-treeview > .nav-item > .nav-link.active,
-.sidebar-dark-danger .nav-treeview > .nav-item > .nav-link.active {
-    background-color: #c82333 !important; /* Darker red for submenu */
+/* Override default primary blue color specifically */
+.sidebar-dark-primary .nav-sidebar > .nav-item.menu-open > .nav-link,
+.sidebar-dark-primary .nav-sidebar > .nav-item:hover > .nav-link,
+.sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link:focus {
+    background-color: rgba(176, 33, 45, 0.9) !important;
     color: #ffffff !important;
 }
 
 /* Icon color for active items */
-.sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active .nav-icon,
-.sidebar-dark-danger .nav-sidebar > .nav-item > .nav-link.active .nav-icon {
+.sidebar-dark-primary .nav-sidebar .nav-item .nav-link.active .nav-icon,
+.sidebar-dark-danger .nav-sidebar .nav-item .nav-link.active .nav-icon {
     color: #ffffff !important;
 }
 
 /* Optional: Add a white accent line on the left side of active items */
-.sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active::before,
-.sidebar-dark-danger .nav-sidebar > .nav-item > .nav-link.active::before {
+.sidebar-dark-primary .nav-sidebar .nav-item .nav-link.active::before,
+.sidebar-dark-danger .nav-sidebar .nav-item .nav-link.active::before {
     content: '';
     position: absolute;
     left: 0;
@@ -39,7 +67,7 @@
     background-color: #ffffff; /* White accent line */
 }
 
-.sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link,
-.sidebar-dark-danger .nav-sidebar > .nav-item > .nav-link {
+.sidebar-dark-primary .nav-sidebar .nav-item .nav-link,
+.sidebar-dark-danger .nav-sidebar .nav-item .nav-link {
     position: relative;
 }

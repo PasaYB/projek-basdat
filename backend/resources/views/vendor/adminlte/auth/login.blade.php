@@ -3,7 +3,7 @@
 <head>
     <title>Login</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="with=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
@@ -51,7 +51,7 @@
                                 <div class="w-100">
                                     <h3 class="mb-4">Sign In</h3>
                                 </div>
-                                <div class="w-100">
+                                <div class="w-100">to
                                     <p class="social-media d-flex justify-content-end">
                                         <a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-facebook"></span></a>
                                         <a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-twitter"></span></a>

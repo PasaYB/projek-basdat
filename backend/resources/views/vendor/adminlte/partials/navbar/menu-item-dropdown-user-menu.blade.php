@@ -18,11 +18,11 @@
     {{-- User menu toggler --}}
     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
         @if(config('adminlte.usermenu_image'))
-            <img src="{{ Auth::user()->adminlte_image() }}"
+            <img src="{{ Auth::user()->profile_image ? asset('storage/' . Auth::user()->profile_image) : asset('vendor/adminlte/dist/img/user4-128x128.jpg') }}"
                  class="user-image img-circle elevation-2"
                  alt="{{ Auth::user()->name }}">
         @endif
-        <span @if(config('adminlte.usermenu_image')) class="d-none d-md-inline" @endif>
+        <span @if(config('adminlte.usermenu_image')) class="d-none d-md-inline font-weight-bold" @else class="font-weight-bold" @endif>
             {{ Auth::user()->name }}
         </span>
     </a>
@@ -35,12 +35,12 @@
             <li class="user-header {{ config('adminlte.usermenu_header_class', 'bg-primary') }}
                 @if(!config('adminlte.usermenu_image')) h-auto @endif">
                 @if(config('adminlte.usermenu_image'))
-                    <img src="{{ Auth::user()->adminlte_image() }}"
+                    <img src="{{ Auth::user()->profile_image ? asset('storage/' . Auth::user()->profile_image) : asset('vendor/adminlte/dist/img/user4-128x128.jpg') }}"
                          class="img-circle elevation-2"
                          alt="{{ Auth::user()->name }}">
                 @endif
                 <p class="@if(!config('adminlte.usermenu_image')) mt-0 @endif">
-                    {{ Auth::user()->name }}
+                    <strong>{{ Auth::user()->name }}</strong>
                     @if(config('adminlte.usermenu_desc'))
                         <small>{{ Auth::user()->adminlte_desc() }}</small>
                     @endif

@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'Kokiku',
+    'title' => 'Khaki Liema',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -63,7 +63,7 @@ return [
     |
     */
 
-    'logo' => '<b>Kokiku</b>',
+    'logo' => '<h4 class="brand-text font-weight-bold">Khaki Liema</h4>',
     'logo_img' => 'vendor/adminlte/dist/img/kokiku.png',
     'logo_img_class' => 'brand-image bg-transparent',
     'logo_img_xl' => null,
@@ -257,7 +257,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'home',
+    'dashboard_url' => '/',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -329,8 +329,8 @@ return [
         ],
         ['header' => 'USER SETTINGS'],
         [
-            'text' => 'Users',
-            'url' => 'admin/settings',
+            'text' => 'Petugas',
+            'url' => 'auth/users',
             'icon' => 'fas fa-fw fa-user',
         ],
         [

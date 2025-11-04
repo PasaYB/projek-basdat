@@ -1,4 +1,4 @@
-<aside class="main-sidebar sidebar-dark-primary bg-danger elevation-4">
+<aside class="main-sidebar sidebar-dark-primary bg-navy elevation-4">
     
     {{-- Sidebar brand logo --}}
     @if(config('adminlte.logo_img_xl'))
