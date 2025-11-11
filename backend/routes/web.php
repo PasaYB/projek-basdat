@@ -3,8 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EmployeeController;
-use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Warehouse\CategoryController;
 
 
 // Authentication Routes
@@ -26,4 +27,6 @@ Route::middleware(['auth:employee'])->group(function () {
         Route::resource('categories', CategoryController::class);
         // Route::resource('products', ProductController::class);
     });
+    
+    Route::resource('suppliers', SupplierController::class);
 });

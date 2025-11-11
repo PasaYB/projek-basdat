@@ -327,18 +327,23 @@ return [
             // 'label' => 6,
             'label_color' => 'success',
         ],
-        ['header' => 'EMPLOYEES'],
+        ['header' => 'DISTRIBUSI'],
         [
             'text' => 'Petugas',
             'url' => 'auth/employees',
             'icon' => 'fas fa-fw fa-user',
+        ],
+        [
+            'text' => 'Supplier',
+            'url' => '/suppliers',
+            'icon' => 'fas fa-fw fa-truck',
         ],
         // [
         //     'text' => 'change_password',
         //     'url' => 'admin/settings',
         //     'icon' => 'fas fa-fw fa-lock',
         // ],
-        ['header' => 'INVENTORIES'],
+        ['header' => 'GUDANG'],
         [
             'text' => 'Gudang',
             'icon' => 'fas fa-fw fa-warehouse',

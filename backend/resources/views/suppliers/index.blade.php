@@ -1,17 +1,17 @@
 @extends('adminlte::page')
 
-@section('title', 'Employees List')
+@section('title', 'Supplier List')
 
 @section('content_header')
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Manajemen Petugas</h1>
+                <h1>Manajemen Supplier</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item active">Petugas</li>
+                    <li class="breadcrumb-item active">Supplier</li>
                 </ol>
             </div>
         </div>
@@ -25,34 +25,32 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Daftar Petugas</h3>
+                            <h3 class="card-title">Daftar Supplier</h3>
                         </div>
                         <div class="card-body">
                             <table id="example2" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Name</th>
-                                        <th>Address</th>
-                                        <th>Created At</th>
+                                        <th>Nama Supplier</th>
+                                        <th>Alamat</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($employees as $employee)
+                                    @foreach($suppliers as $supplier)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $employee->name }}</td>
-                                        <td>{{ $employee->address ?? '-' }}</td>
-                                        <td>{{ $employee->created_at->format('M d, Y') }}</td>
+                                        <td>{{ $supplier->name }}</td>
+                                        <td>{{ $supplier->address }}</td>
                                         <td>
-                                            <a href="{{ route('employees.show', $employee->id) }}" class="btn btn-secondary btn-sm">
+                                            <a href="{{ route('suppliers.show', $supplier->id) }}" class="btn btn-secondary btn-sm">
                                                 <i class="fas fa-eye"></i>
                                             </a>
-                                            <a href="{{ route('employees.edit', $employee->id) }}" class="btn btn-info btn-sm">
+                                            <a href="{{ route('suppliers.edit', $supplier->id) }}" class="btn btn-info btn-sm">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-                                            <form action="{{ route('employees.destroy', $employee->id) }}" method="POST" style="display:inline;" class="delete-form">
+                                            <form action="{{ route('suppliers.destroy', $supplier->id) }}" method="POST" style="display:inline;" class="delete-form">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="button" class="btn btn-danger btn-sm delete-btn">
@@ -104,6 +102,13 @@
             dom: '<"row"<"col-sm-12 col-md-6"B><"col-sm-12 col-md-6"f>>rtip',
             buttons: [
                 {
+                    text: '<i class="fas fa-plus"></i> Add',
+                    className: 'btn btn-sm btn-success',
+                    action: function (e, dt, node, config) {
+                        window.location.href = '{{ route("suppliers.create") }}';
+                    }
+                },
+                {
                     extend: 'copy',
                     text: '<i class="fas fa-copy"></i> Copy',
                     className: 'btn btn-sm btn-dark',
@@ -151,7 +156,7 @@
             ],
             language: {
                 search: "_INPUT_",
-                searchPlaceholder: "Search petugas..."
+                searchPlaceholder: "Search Supplier..."
             }
         });
 
@@ -172,19 +177,14 @@
                 text: "You won't be able to revert this!",
                 icon: 'warning',
                 showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
                 confirmButtonText: 'Yes, delete it!',
                 cancelButtonText: 'Cancel',
                 reverseButtons: true
             }).then((result) => {
                 if (result.isConfirmed) {
                     form.submit();
-                    Swal.fire({
-                        title: 'Deleted!',
-                        text: 'Employee has been deleted successfully.',
-                        icon: 'success',
-                        timer: 2000,
-                        showConfirmButton: false
-                    });
                 }
             });
         });

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Database\Seeders\CategorySeeder;
 use Database\Seeders\EmployeeSeeder;
+use Database\Seeders\SupplierSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DatabaseSeeder extends Seeder
@@ -20,7 +21,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             CategorySeeder::class,
-            EmployeeSeeder::class
+            EmployeeSeeder::class,
+            SupplierSeeder::class
         ]);
     }
 }
