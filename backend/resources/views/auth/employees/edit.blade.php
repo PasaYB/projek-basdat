@@ -1,15 +1,28 @@
 @extends('adminlte::page')
 
-@section('title', 'Edit User')
+@section('title', 'Edit Employee')
 
 @section('adminlte_css')
     <style>
         .profile-user-img {
-            width: 100px;
-            height: 100px;
+            width: 100px !important;
+            height: 100px !important;
             object-fit: cover;
             border: 3px solid #adb5bd;
             margin: 0 auto;
+            border-radius: 50% !important;
+            display: block;
+            text-align: center;
+            line-height: 94px;
+            font-size: 12px;
+            color: #6c757d;
+            background-color: #f8f9fa;
+        }
+        
+        .box-profile .text-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     </style>
 @stop
@@ -18,13 +31,13 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Edit User</h1>
+                <h1>Edit Petugas</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('users.index') }}">Users</a></li>
-                    <li class="breadcrumb-item active">{{ $user->name }} / Edit</li>
+                    <li class="breadcrumb-item"><a href="{{ route('employees.index') }}">Petugas</a></li>
+                    <li class="breadcrumb-item active">{{ $employee->name }} / Edit</li>
                 </ol>
             </div>
         </div>
@@ -34,7 +47,7 @@
 @section('content')
 <section class="content">
     <div class="container-fluid">
-        <form action="{{ route('users.update', $user->id) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('employees.update', $employee->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             
@@ -44,12 +57,12 @@
                         <div class="card-body box-profile">
                             <div class="text-center">
                                 <img class="profile-user-img img-fluid img-circle" id="profilePreview"
-                                     src="{{ $user->profile_image ? asset('storage/' . $user->profile_image) : asset('vendor/adminlte/dist/img/user4-128x128.jpg') }}"
-                                     alt="User profile picture">
+                                     src="{{ $employee->profile_image ? asset('storage/' . $employee->profile_image) : asset('vendor/adminlte/dist/img/user4-128x128.jpg') }}"
+                                     alt="Profile Picture">
                             </div>
 
-                            <h3 class="profile-username text-center">{{ $user->name }}</h3>
-                            <p class="text-muted text-center">{{ $user->email }}</p>
+                            <h3 class="profile-username text-center">{{ $employee->name }}</h3>
+                            <p class="text-muted text-center">{{ $employee->email }}</p>
                             
                             <div class="mt-3">
                                 <label for="profile_image">Profile Image</label>
@@ -65,24 +78,13 @@
                         </div>
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="education"><i class="fas fa-book mr-1"></i> Education</label>
-                                <textarea class="form-control" id="education" name="education" rows="3" placeholder="Enter education background">{{ old('education', $user->education) }}</textarea>
+                                <label for="phone_number"><i class="fas fa-phone mr-1"></i> Phone Number</label>
+                                <input type="text" class="form-control" id="phone_number" name="phone_number" value="{{ old('phone_number', $employee->phone_number) }}" placeholder="Enter phone number">
                             </div>
 
                             <div class="form-group">
-                                <label for="location"><i class="fas fa-map-marker-alt mr-1"></i> Location</label>
-                                <input type="text" class="form-control" id="location" name="location" value="{{ old('location', $user->location) }}" placeholder="Enter location">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="skills"><i class="fas fa-pencil-alt mr-1"></i> Skills</label>
-                                <input type="text" class="form-control" id="skills" name="skills" value="{{ old('skills', $user->skills) }}" placeholder="Enter skills (comma separated)">
-                                <small class="form-text text-muted">Separate skills with commas (e.g., PHP,Laravel,JavaScript)</small>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="notes"><i class="far fa-file-alt mr-1"></i> Notes</label>
-                                <textarea class="form-control" id="notes" name="notes" rows="3" placeholder="Enter notes">{{ old('notes', $user->notes) }}</textarea>
+                                <label for="address"><i class="fas fa-map-marker-alt mr-1"></i> Address</label>
+                                <input type="text" class="form-control" id="address" name="address" value="{{ old('address', $employee->address) }}" placeholder="Enter address">
                             </div>
                         </div>
                     </div>
@@ -91,25 +93,15 @@
                 <div class="col-md-9">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">User Details</h3>
+                            <h3 class="card-title">Employee Details</h3>
                         </div>
                         <div class="card-body">
                             <div class="form-horizontal">
                                 <div class="form-group row">
-                                    <label for="name" class="col-sm-2 col-form-label">Name <span class="text-navy">*</span></label>
+                                    <label for="name" class="col-sm-2 col-form-label">Name <span class="text-danger">*</span></label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name', $user->name) }}" required>
+                                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name', $employee->name) }}" required>
                                         @error('name')
-                                            <span class="invalid-feedback">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="email" class="col-sm-2 col-form-label">Email <span class="text-navy">*</span></label>
-                                    <div class="col-sm-10">
-                                        <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email', $user->email) }}" required>
-                                        @error('email')
                                             <span class="invalid-feedback">{{ $message }}</span>
                                         @enderror
                                     </div>
@@ -138,24 +130,24 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Created At</label>
                                     <div class="col-sm-10">
-                                        <p class="form-control-plaintext">{{ $user->created_at->format('F d, Y h:i A') }}</p>
+                                        <p class="form-control-plaintext">{{ $employee->created_at->format('F d, Y h:i A') }}</p>
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Updated At</label>
                                     <div class="col-sm-10">
-                                        <p class="form-control-plaintext">{{ $user->updated_at->format('F d, Y h:i A') }}</p>
+                                        <p class="form-control-plaintext">{{ $employee->updated_at->format('F d, Y h:i A') }}</p>
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <div class="col-sm-10 offset-sm-2">
-                                        <a href="{{ route('users.show', $user->id) }}" class="btn btn-secondary">
-                                            <i class="fas fa-times"></i> Cancel
+                                        <a href="{{ route('employees.show', $employee->id) }}" class="btn btn-secondary">
+                                            <i class="fas fa-times"></i>
                                         </a>
                                         <button type="submit" class="btn btn-success">
-                                            <i class="fas fa-save"></i> Save Changes
+                                            <i class="fas fa-save"></i> 
                                         </button>
                                     </div>
                                 </div>

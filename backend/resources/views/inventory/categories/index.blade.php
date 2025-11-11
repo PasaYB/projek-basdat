@@ -1,17 +1,17 @@
 @extends('adminlte::page')
 
-@section('title', 'Users List')
+@section('title', 'Categories List')
 
 @section('content_header')
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Manajemen Petugas</h1>
+                <h1>Manajemen Kategori</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="/">HS  ome</a></li>
-                    <li class="breadcrumb-item active">Petugas</li>
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item active">Kategori</li>
                 </ol>
             </div>
         </div>
@@ -25,38 +25,38 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">All Petugas Data</h3>
+                            <h3 class="card-title">Daftar Kategori</h3>
                         </div>
                         <div class="card-body">
                             <table id="example2" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
+                                        <th>No</th>
                                         <th>Name</th>
-                                        <th>Email</th>
+                                        <th>Deskripsi</th>
                                         <th>Created At</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($users as $user)
+                                    @foreach($categories as $category)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $user->name }}</td>
-                                        <td>{{ $user->email }}</td>
-                                        <td>{{ $user->created_at->format('M d, Y') }}</td>
+                                        <td>{{ $category->name }}</td>
+                                        <td>{{ $category->description }}</td>
+                                        <td>{{ $category->created_at->format('M d, Y') }}</td>
                                         <td>
-                                            <a href="{{ route('users.show', $user->id) }}" class="btn btn-primary btn-sm">
-                                                <i class="fas fa-eye"></i> View
+                                            <a href="{{ route('categories.show', $category->id) }}" class="btn btn-secondary btn-sm">
+                                                <i class="fas fa-eye"></i>
                                             </a>
-                                            <a href="{{ route('users.edit', $user->id) }}" class="btn btn-info btn-sm">
-                                                <i class="fas fa-edit"></i> Edit
+                                            <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-info btn-sm">
+                                                <i class="fas fa-edit"></i>
                                             </a>
-                                            <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline;">
+                                            <form action="{{ route('categories.destroy', $category->id) }}" method="POST" style="display:inline;" class="delete-form">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this user?')">
-                                                    <i class="fas fa-trash"></i> Delete
+                                                <button type="button" class="btn btn-danger btn-sm delete-btn">
+                                                    <i class="fas fa-trash"></i>
                                                 </button>
                                             </form>
                                         </td>
@@ -75,6 +75,7 @@
 @section('adminlte_css')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 @stop
 
 @section('adminlte_js')
@@ -88,6 +89,7 @@
     <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.colVis.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
     <script>
     $(function () {
@@ -102,9 +104,16 @@
             dom: '<"row"<"col-sm-12 col-md-6"B><"col-sm-12 col-md-6"f>>rtip',
             buttons: [
                 {
+                    text: '<i class="fas fa-plus"></i> Add',
+                    className: 'btn btn-sm btn-success',
+                    action: function (e, dt, node, config) {
+                        window.location.href = '{{ route("categories.create") }}';
+                    }
+                },
+                {
                     extend: 'copy',
                     text: '<i class="fas fa-copy"></i> Copy',
-                    className: 'btn btn-sm btn-default',
+                    className: 'btn btn-sm btn-dark',
                     exportOptions: { 
                         columns: ':visible:not(:last-child)' 
                     }
@@ -112,7 +121,7 @@
                 {
                     extend: 'csv',
                     text: '<i class="fas fa-file-csv"></i> CSV',
-                    className: 'btn btn-sm btn-default',
+                    className: 'btn btn-sm btn-dark',
                     exportOptions: { 
                         columns: ':visible:not(:last-child)' 
                     }
@@ -120,7 +129,7 @@
                 {
                     extend: 'excel',
                     text: '<i class="fas fa-file-excel"></i> Excel',
-                    className: 'btn btn-sm btn-default',
+                    className: 'btn btn-sm btn-dark',
                     exportOptions: { 
                         columns: ':visible:not(:last-child)' 
                     }
@@ -128,7 +137,7 @@
                 {
                     extend: 'pdf',
                     text: '<i class="fas fa-file-pdf"></i> PDF',
-                    className: 'btn btn-sm btn-default',
+                    className: 'btn btn-sm btn-dark',
                     exportOptions: { 
                         columns: ':visible:not(:last-child)' 
                     }
@@ -136,7 +145,7 @@
                 {
                     extend: 'print',
                     text: '<i class="fas fa-print"></i> Print',
-                    className: 'btn btn-sm btn-default',
+                    className: 'btn btn-sm btn-dark',
                     exportOptions: { 
                         columns: ':visible:not(:last-child)' 
                     }
@@ -144,13 +153,42 @@
                 {
                     extend: 'colvis',
                     text: '<i class="fas fa-columns"></i> Column visibility',
-                    className: 'btn btn-sm btn-default'
+                    className: 'btn btn-sm btn-dark'
                 }
             ],
             language: {
                 search: "_INPUT_",
-                searchPlaceholder: "Search petugas..."
+                searchPlaceholder: "Search kategori..."
             }
+        });
+
+        // SweetAlert2 for delete confirmation
+        $(document).on('click', '.delete-btn', function(e) {
+            e.preventDefault();
+            var form = $(this).closest('form');
+            
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: "btn btn-success mx-2",
+                    cancelButton: "btn btn-danger"
+                },
+                buttonsStyling: false
+            });
+            swalWithBootstrapButtons.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'Cancel',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
         });
     });
     </script>

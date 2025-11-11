@@ -72,20 +72,6 @@
                                     @enderror
                                 </div>
 
-                                {{-- Email field --}}
-                                <div class="form-group mb-3">
-                                    <label class="label" for="email">Email</label>
-                                    <input type="email" name="email" id="email" 
-                                           class="form-control @error('email') is-invalid @enderror" 
-                                           value="{{ old('email') }}" 
-                                           placeholder="Email" required>
-                                    @error('email')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-
                                 {{-- Password field --}}
                                 <div class="form-group mb-3">
                                     <label class="label" for="password">Password</label>
@@ -137,5 +123,6 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="{{ asset('vendor/adminlte/auth/login/js/main.js') }}"></script>
+
 </body>
 </html>

@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/auth/login/css/style.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 </head>
 <body>
     @php
@@ -39,7 +40,7 @@
                     <div class="wrap d-md-flex">
                         <div class="text-wrap p-4 p-lg-5 text-center d-flex align-items-center order-md-last">
                             <div class="text w-100">
-                                <h2>Welcome to login</h2>
+                                <h2>Welcome to Khaki Liema</h2>
                                 <p>Don't have an account?</p>
                                 @if($registerUrl)
                                     <a href="{{ $registerUrl }}" class="btn btn-white btn-outline-white">Sign Up</a>
@@ -51,7 +52,7 @@
                                 <div class="w-100">
                                     <h3 class="mb-4">Sign In</h3>
                                 </div>
-                                <div class="w-100">to
+                                <div class="w-100">
                                     <p class="social-media d-flex justify-content-end">
                                         <a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-facebook"></span></a>
                                         <a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-twitter"></span></a>
@@ -101,11 +102,11 @@
                                             <span class="checkmark"></span>
                                         </label>
                                     </div>
-                                    <div class="w-50 text-md-right">
+                                    {{-- <div class="w-50 text-md-right">
                                         @if($passResetUrl)
                                             <a href="{{ $passResetUrl }}">Forgot Password</a>
                                         @endif
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </form>
                         </div>
@@ -119,5 +120,18 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="{{ asset('vendor/adminlte/auth/login/js/main.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    @if(session('success'))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Registration Successful!',
+            text: '{{ session('success') }}',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'OK'
+        });
+    </script>
+    @endif
 </body>
 </html>

@@ -15,7 +15,7 @@ return [
     */
 
     'title' => 'Khaki Liema',
-    'title_prefix' => '',
+    'title_prefix' => 'Khaki Liema |  ',
     'title_postfix' => '',
 
     /*
@@ -327,29 +327,31 @@ return [
             // 'label' => 6,
             'label_color' => 'success',
         ],
-        ['header' => 'USER SETTINGS'],
+        ['header' => 'EMPLOYEES'],
         [
             'text' => 'Petugas',
-            'url' => 'auth/users',
+            'url' => 'auth/employees',
             'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'Order',
-            'url' => 'admin/settings',
-            'icon' => 'fa-note',
         ],
         // [
         //     'text' => 'change_password',
         //     'url' => 'admin/settings',
         //     'icon' => 'fas fa-fw fa-lock',
         // ],
+        ['header' => 'INVENTORIES'],
         [
-            'text' => 'multilevel',
-            'icon' => 'fas fa-fw fa-share',
+            'text' => 'Gudang',
+            'icon' => 'fas fa-fw fa-warehouse',
             'submenu' => [
                 [
-                    'text' => 'level_one',
+                    'text' => 'Kategori',
+                    'url' => 'inventory/categories',
+                    'icon' => 'fas fa-solid fa-list',
+                ],
+                [
+                    'text' => 'Bahan Baku',
                     'url' => '#',
+                    'icon' => 'fas fa-solid fa-boxes',
                 ],
                 [
                     'text' => 'level_one',
@@ -375,13 +377,8 @@ return [
                         ],
                     ],
                 ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                ],
             ],
         ],
-        ['header' => 'labels'],
         // [
         //     'text' => 'important',
         //     'icon_color' => 'red',

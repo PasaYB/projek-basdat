@@ -1,15 +1,28 @@
 @extends('adminlte::page')
 
-@section('title', 'User Details')
+@section('title', 'Employee Details')
 
 @section('adminlte_css')
     <style>
         .profile-user-img {
-            width: 100px;
-            height: 100px;
+            width: 100px !important;
+            height: 100px !important;
             object-fit: cover;
-            border: 3px solid #adb5bd;
+            border: 3px solid #042f59;
             margin: 0 auto;
+            border-radius: 50% !important;
+            display: block;
+            text-align: center;
+            line-height: 94px;
+            font-size: 12px;
+            color: #6c757d;
+            background-color: #f8f9fa;
+        }
+        
+        .box-profile .text-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     </style>
 @stop
@@ -18,13 +31,13 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Users Management</h1>
+                <h1>Manajemen Petugas</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('users.index') }}">Users</a></li>
-                    <li class="breadcrumb-item active">{{ $user->name }}</li>
+                    <li class="breadcrumb-item"><a href="{{ route('employees.index') }}">Petugas</a></li>
+                    <li class="breadcrumb-item active">{{ $employee->name }}</li>
                 </ol>
             </div>
         </div>
@@ -40,12 +53,11 @@
                     <div class="card-body box-profile">
                         <div class="text-center">
                             <img class="profile-user-img img-fluid img-circle"
-                                 src="{{ $user->profile_image ? asset('storage/' . $user->profile_image) : asset('vendor/adminlte/dist/img/user4-128x128.jpg') }}"
-                                 alt="User profile picture">
+                                 src="{{ $employee->profile_image ? asset('storage/' . $employee->profile_image) : asset('vendor/adminlte/dist/img/user4-128x128.jpg') }}"
+                                 alt="Profile Picture">
                         </div>
 
-                        <h3 class="profile-username text-center">{{ $user->name }}</h3>
-                        <p class="text-muted text-center">{{ $user->email }}</p>
+                        <h3 class="profile-username text-center">{{ $employee->name }}</h3>
                     </div>
                 </div>
 
@@ -54,33 +66,17 @@
                         <h3 class="card-title">About Me</h3>
                     </div>
                     <div class="card-body">
-                        <strong><i class="fas fa-book mr-1"></i> Education</strong>
+                        <strong><i class="fas fa-book mr-1"></i> Phone Number</strong>
                         <p class="text-muted">
-                            {{ $user->education ?? 'Not assigned yet' }}
+                            {{ $employee->phone_number ?? 'Not assigned yet' }}
                         </p>
 
                         <hr>
 
-                        <strong><i class="fas fa-map-marker-alt mr-1"></i> Location</strong>
-                        <p class="text-muted">{{ $user->location ?? 'Not assigned yet' }}</p>
+                        <strong><i class="fas fa-map-marker-alt mr-1"></i> Address</strong>
+                        <p class="text-muted">{{ $employee->address ?? 'Not assigned yet' }}</p>
 
                         <hr>
-
-                        <strong><i class="fas fa-pencil-alt mr-1"></i> Skills</strong>
-                        <p class="text-muted">
-                            @if($user->skills)
-                                @foreach(explode(',', $user->skills) as $skill)
-                                    <span class="badge badge-navy">{{ trim($skill) }}</span>
-                                @endforeach
-                            @else
-                                Not assigned yet
-                            @endif
-                        </p>
-
-                        <hr>
-
-                        <strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
-                        <p class="text-muted">{{ $user->notes ?? 'Not assigned yet' }}</p>
                     </div>
                 </div>
             </div>
@@ -88,45 +84,38 @@
             <div class="col-md-9">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">User Details</h3>
+                        <h3 class="card-title">Employee Details</h3>
                     </div>
                     <div class="card-body">
                         <div class="form-horizontal">
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label font-weight-bold">Name</label>
                                 <div class="col-sm-10">
-                                    <p class="form-control-plaintext">{{ $user->name }}</p>
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label font-weight-bold">Email</label>
-                                <div class="col-sm-10">
-                                    <p class="form-control-plaintext">{{ $user->email }}</p>
+                                    <p class="form-control-plaintext">{{ $employee->name }}</p>
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label font-weight-bold">Created At</label>
                                 <div class="col-sm-10">
-                                    <p class="form-control-plaintext">{{ $user->created_at->format('F d, Y h:i A') }}</p>
+                                    <p class="form-control-plaintext">{{ $employee->created_at->format('F d, Y h:i A') }}</p>
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label font-weight-bold">Updated At</label>
                                 <div class="col-sm-10">
-                                    <p class="form-control-plaintext">{{ $user->updated_at->format('F d, Y h:i A') }}</p>
+                                    <p class="form-control-plaintext">{{ $employee->updated_at->format('F d, Y h:i A') }}</p>
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <div class="col-sm-10 offset-sm-2">
-                                    <a href="{{ route('users.index') }}" class="btn btn-secondary">
-                                        <i class="fas fa-arrow-left"></i> Back to List
+                                    <a href="{{ route('employees.index') }}" class="btn btn-secondary">
+                                        <i class="fas fa-arrow-left"></i> 
                                     </a>
-                                    <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary">
-                                        <i class="fas fa-edit"></i> Edit Profile
+                                    <a href="{{ route('employees.edit', $employee->id) }}" class="btn btn-primary">
+                                        <i class="fas fa-edit"></i> 
                                     </a>
                                 </div>
                             </div>
