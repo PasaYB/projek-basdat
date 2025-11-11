@@ -23,7 +23,8 @@ class SupplierController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255|unique:suppliers,name',
-            'description' => 'nullable|string',
+            'phone_number' => 'required|string|max:15',
+            'address' => 'required|string',
         ]);
         
         Supplier::create($request->all());
@@ -51,7 +52,8 @@ class SupplierController extends Controller
         
         $request->validate([
             'name' => 'required|string|max:255|unique:suppliers,name,' . $supplier->id,
-            'description' => 'nullable|string',
+            'phone_number' => 'required|string|max:15',
+            'address' => 'required|string',
         ]);
         
         $supplier->update($request->all());
