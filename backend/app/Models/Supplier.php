@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Order;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Supplier extends Model
 {
@@ -15,4 +16,9 @@ class Supplier extends Model
         'phone_number',
         'address',
     ];
+
+    // public function orders()
+    // {
+    //     return $this->hasMany(Order::class);
+    // }
 }

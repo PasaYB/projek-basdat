@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('material_outs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('accepted_by');
+            $table->unsignedBigInteger('accepted_by');
             $table->string('note');
             $table->timestamps();
         });

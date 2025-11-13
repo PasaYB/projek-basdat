@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('report_materials', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('material_id');
+            $table->unsignedBigInteger('material_id');
             $table->date('period_start');
             $table->date('period_end');
-            $table->unsignedInteger('in_qty'); 
-            $table->unsignedInteger('out_qty'); 
-            $table->unsignedInteger('created_by');
+            $table->unsignedBigInteger('in_qty'); 
+            $table->unsignedBigInteger('out_qty'); 
+            $table->unsignedBigInteger('created_by');
             $table->timestamps();
         });
     }

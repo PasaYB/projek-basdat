@@ -6,6 +6,8 @@ use Illuminate\Database\Seeder;
 use Database\Seeders\CategorySeeder;
 use Database\Seeders\EmployeeSeeder;
 use Database\Seeders\SupplierSeeder;
+use Database\Seeders\IngredientSeeder;
+use Database\Seeders\SupplierIngredientSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DatabaseSeeder extends Seeder
@@ -22,7 +24,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             CategorySeeder::class,
             EmployeeSeeder::class,
-            SupplierSeeder::class
+            SupplierSeeder::class,
+            IngredientSeeder::class,
         ]);
     }
 }

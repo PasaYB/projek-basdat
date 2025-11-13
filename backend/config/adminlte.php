@@ -327,16 +327,33 @@ return [
             // 'label' => 6,
             'label_color' => 'success',
         ],
-        ['header' => 'DISTRIBUSI'],
+        ['header' => 'KARYAWAN'],
         [
             'text' => 'Petugas',
             'url' => 'auth/employees',
             'icon' => 'fas fa-fw fa-user',
         ],
+        ['header' => 'DISTRIBUSI'],
         [
             'text' => 'Supplier',
-            'url' => '/suppliers',
+            'url' => 'distribution/suppliers',
             'icon' => 'fas fa-fw fa-truck',
+        ],
+                [
+            'text' => 'Pencatatan',
+            'icon' => 'fas fa-fw fa-clipboard-list',
+            'submenu' => [
+                [
+                    'text' => 'Bahan Masuk',
+                    'url' => 'distribution/material_ins',
+                    'icon' => 'fas fa-solid fa-arrow-right',
+                ],
+                [
+                    'text' => 'Bahan Keluar',
+                    'url' => 'distribution/material_outs',
+                    'icon' => 'fas fa-solid fa-arrow-left',
+                ],
+            ]
         ],
         // [
         //     'text' => 'change_password',
@@ -358,30 +375,30 @@ return [
                     'url' => '#',
                     'icon' => 'fas fa-solid fa-boxes',
                 ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                        ],
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
+                // [
+                //     'text' => 'level_one',
+                //     'url' => '#',
+                //     'submenu' => [
+                //         [
+                //             'text' => 'level_two',
+                //             'url' => '#',
+                //         ],
+                //         [
+                //             'text' => 'level_two',
+                //             'url' => '#',
+                //             'submenu' => [
+                //                 [
+                //                     'text' => 'level_three',
+                //                     'url' => '#',
+                //                 ],
+                //                 [
+                //                     'text' => 'level_three',
+                //                     'url' => '#',
+                //                 ],
+                //             ],
+                //         ],
+                //     ],
+                // ],
             ],
         ],
         // [

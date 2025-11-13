@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('materials', function (Blueprint $table) {
+        Schema::create('ingredients', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
-            $table->unsignedBigInteger('materials_in_id');
-            $table->unsignedBigInteger('quantity');
+            $table->foreignId('supplier_id')->constrained('suppliers')->onDelete('cascade');
+            $table->unsignedBigInteger('price_per_unit');
             $table->string('unit');
-            $table->date('expired_at');
-            $table->enum('status', ['available', 'unavailable'])->default('available');
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('materials');
+        Schema::dropIfExists('ingredients');
     }
 };

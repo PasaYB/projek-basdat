@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('material_out_details', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('material_id');
-            $table->unsignedInteger('material_out_id');
-            $table->unsignedInteger('out_qty'); 
+            $table->unsignedBigInteger('material_id');
+            $table->unsignedBigInteger('material_out_id');
+            $table->unsignedBigInteger('out_qty'); 
             $table->timestamps();
         });
     }

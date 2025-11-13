@@ -2,9 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\MaterialInController;
+use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\Warehouse\CategoryController;
 
 
@@ -28,5 +31,9 @@ Route::middleware(['auth:employee'])->group(function () {
         // Route::resource('products', ProductController::class);
     });
     
-    Route::resource('suppliers', SupplierController::class);
+    Route::prefix('distribution')->group(function () {
+        Route::resource('suppliers', SupplierController::class);
+        Route::resource('material_ins', MaterialInController::class);
+        Route::resource('material_outs', MaterialOutController::class);
+    });
 });
