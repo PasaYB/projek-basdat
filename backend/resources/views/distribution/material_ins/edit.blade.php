@@ -34,7 +34,7 @@
         <div class="card card-navy">
             <div class="card-header">
             <h3 class="card-title">Edit Bahan Masuk</h3>
-            </div>
+        </div>
             <!-- /.card-header -->
             <!-- form start -->
             <form action="{{ route('material_ins.update', $material_in->id) }}" method="POST" enctype="multipart/form-data">

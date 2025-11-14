@@ -76,7 +76,7 @@
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label font-weight-bold">Catatan</label>
                         <div class="col-sm-10">
-                            <p class="form-control-plaintext">{{ $material_in->note }}</p>
+                            <p class="form-control-plaintext">{{ $material_in->note ?? 'HIDUP JOKOWIIIIIIIIIIIIIIII'}}</p>
                         </div>
                     </div>
 

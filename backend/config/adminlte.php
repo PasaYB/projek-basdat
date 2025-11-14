@@ -372,7 +372,7 @@ return [
                 ],
                 [
                     'text' => 'Bahan Baku',
-                    'url' => '#',
+                    'url' => 'inventory/materials',
                     'icon' => 'fas fa-solid fa-boxes',
                 ],
                 // [

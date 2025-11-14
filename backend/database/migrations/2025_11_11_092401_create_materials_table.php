@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('materials', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->unsignedBigInteger('ingredient_id');
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
-            $table->unsignedBigInteger('materials_in_id');
             $table->unsignedBigInteger('quantity');
             $table->string('unit');
             $table->date('expired_at');

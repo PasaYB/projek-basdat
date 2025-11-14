@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\MaterialInController;
 use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\Warehouse\CategoryController;
+use App\Http\Controllers\Warehouse\MaterialController;
 
 
 // Authentication Routes
@@ -28,9 +29,9 @@ Route::middleware(['auth:employee'])->group(function () {
 
     Route::prefix('inventory')->group(function () {
         Route::resource('categories', CategoryController::class);
-        // Route::resource('products', ProductController::class);
+        Route::resource('materials', MaterialController::class);
     });
-    
+
     Route::prefix('distribution')->group(function () {
         Route::resource('suppliers', SupplierController::class);
         Route::resource('material_ins', MaterialInController::class);
