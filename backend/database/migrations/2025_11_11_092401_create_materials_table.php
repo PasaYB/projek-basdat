@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('ingredient_id');
             $table->unsignedBigInteger('quantity');
             $table->enum('status', ['available', 'unavailable'])->default('available');
+            $table->foreignId('last_updated_by')->constrained('employees')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -6,9 +6,10 @@ use App\Models\Supplier;
 use App\Models\Ingredient;
 use Illuminate\Http\Request;
 use App\Models\Warehouse\Material;
-use App\Models\Warehouse\MaterialOut;
 use Illuminate\Support\Facades\DB;
 use App\Models\Warehouse\MaterialIn;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Warehouse\MaterialOut;
 
 class MaterialInController extends Controller
 {
@@ -36,7 +37,10 @@ class MaterialInController extends Controller
             'quantity' => 'required|numeric|min:1',
             'in_date' => 'required|date',
             'note' => 'nullable|string',
+            // 'created_by' => Auth::id()
         ]);
+
+        $validated['created_by'] = auth()->id();
 
         // dd($validated);
 
@@ -54,6 +58,7 @@ class MaterialInController extends Controller
             ]);
 
             // tambahkan stoknya
+            $material->last_updated_by = $validated['created_by'];
             $material->ingredient_id = $in->ingredient->id;
             $material->quantity = ($material->quantity ?? 0) + $in->quantity;
             $material->status = $material->quantity > 0 ? 'available' : 'unavailable';
@@ -90,6 +95,8 @@ class MaterialInController extends Controller
             'note' => 'nullable|string',
         ]);
 
+        $validated['created_by'] = auth()->id();
+
         // $ingredient = Ingredient::findOrFail($validated['ingredient_id']);
 
         // $validated['supplier_id'] = $ingredient->supplier_id;
@@ -114,7 +121,8 @@ class MaterialInController extends Controller
             $material = Material::firstOrNew([
                 'ingredient_id' => $in->ingredient_id,
             ]);
-
+            
+            $material->last_updated_by = $validated['created_by'];
             $material->quantity = ($material->quantity ?? 0) + $diff;
             $material->status = $material->quantity > 0 ? 'available' : 'unavailable';
             $material->save();

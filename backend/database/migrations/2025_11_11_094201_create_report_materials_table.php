@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('period_end');
             $table->unsignedBigInteger('in_qty'); 
             $table->unsignedBigInteger('out_qty'); 
-            $table->unsignedBigInteger('created_by');
+            $table->foreignId('created_by')->constrained('employees')->onDelete('cascade');
             $table->timestamps();
         });
     }

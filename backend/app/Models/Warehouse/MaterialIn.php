@@ -16,7 +16,8 @@ class MaterialIn extends Model
         'total_price',
         'quantity',
         'in_date',
-        'note'
+        'note',
+        'created_by'
     ];
 
     public function ingredient()

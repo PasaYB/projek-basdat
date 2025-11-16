@@ -16,6 +16,7 @@ class Material extends Model
         'ingredient_id',
         'quantity',
         'status',
+        'last_updated_by'
     ];
 
     public function ingredient()

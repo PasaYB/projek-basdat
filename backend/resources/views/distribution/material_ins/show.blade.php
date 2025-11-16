@@ -53,7 +53,7 @@
                         <h3 class="card-title">Detail Kategori</h3>
                     </div>
                     <div class="card-body">
-                        <strong><i class="fas fa-box mr-2"></i> Jenis</strong>
+                        <strong><i class="fas fa-tag mr-2"></i> Jenis</strong>
                         <p class="text-muted">{{ $material_in->ingredient->category->name }}</p>
                         <hr>
                     </div>

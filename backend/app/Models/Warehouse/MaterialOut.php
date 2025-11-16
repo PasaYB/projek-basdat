@@ -15,7 +15,8 @@ class MaterialOut extends Model
         'ingredient_id',
         'quantity',
         'out_date',
-        'note'
+        'note',
+        'created_by'
     ];
 
     public function ingredient()

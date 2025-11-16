@@ -6,6 +6,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\IngredientController;
 use App\Http\Controllers\MaterialInController;
 use App\Http\Controllers\MaterialOutController;
 use App\Http\Controllers\OrderDetailController;
@@ -30,6 +31,7 @@ Route::middleware(['auth:employee'])->group(function () {
 
     Route::prefix('inventory')->group(function () {
         Route::resource('categories', CategoryController::class);
+        Route::resource('ingredients', IngredientController::class);
         Route::resource('materials', MaterialController::class);
     });
 

@@ -43,7 +43,10 @@ class MaterialOutController extends Controller
             'quantity' => 'required|numeric|min:1',
             'out_date' => 'required|date',
             'note' => 'nullable|string',
+            // 'created_by' => Auth()->id(),
         ]);
+
+        $validated['created_by'] = auth()->id();
 
         $material = Material::where('ingredient_id', $validated['ingredient_id'])->first();
 
@@ -113,7 +116,10 @@ class MaterialOutController extends Controller
             'quantity' => 'required|numeric|min:1',
             'out_date' => 'required|date',
             'note' => 'nullable|string',
+            // 'created_by' => Auth()->id(),
         ]);
+
+        $validated['created_by'] = auth()->id();
 
         // Restore the old quantity back to material stock
         $oldMaterial = Material::where('ingredient_id', $material_out->ingredient_id)->first();

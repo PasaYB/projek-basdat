@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('quantity');
             $table->date('in_date');
             $table->string('note')->nullable();
+            $table->foreignId('created_by')->constrained('employees')->onDelete('cascade');
             $table->timestamps();
         });
     }
