@@ -2,11 +2,25 @@
 
 namespace App\Models\Warehouse;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Ingredient;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class MaterialOut extends Model
 {
     /** @use HasFactory<\Database\Factories\\Warehouse\MaterialOutFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'ingredient_id',
+        'quantity',
+        'unit',
+        'out_date',
+        'note'
+    ];
+
+    public function ingredient()
+    {
+        return $this->belongsTo(Ingredient::class, 'ingredient_id');
+    }
 }

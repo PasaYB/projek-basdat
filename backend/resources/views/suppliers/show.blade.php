@@ -51,13 +51,13 @@
                         </div>
                     </div>
 
-                    <div class="form-group row">
-                        <div class="col-sm-10 offset-sm-2">
-                            <a href="{{ route('suppliers.index') }}" class="btn btn-secondary">
-                                <i class="fas fa-arrow-left"></i> 
-                            </a>
-                        </div>
-                    </div>
+                </div>
+            </div>
+            <div class="form-group row mt-8">
+                <div class="col-sm-10 mx-4">
+                    <a href="{{ route('suppliers.index') }}" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> 
+                    </a>
                 </div>
             </div>
         </div>

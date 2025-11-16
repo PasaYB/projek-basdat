@@ -7,6 +7,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\MaterialInController;
+use App\Http\Controllers\MaterialOutController;
 use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\Warehouse\CategoryController;
 use App\Http\Controllers\Warehouse\MaterialController;

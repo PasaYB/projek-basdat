@@ -13,8 +13,11 @@ return new class extends Migration
     {
         Schema::create('material_outs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('accepted_by');
-            $table->string('note');
+            $table->unsignedBigInteger('ingredient_id');
+            $table->unsignedBigInteger('quantity');
+            // $table->string('unit');
+            $table->date('out_date');
+            $table->string('note')->nullable();
             $table->timestamps();
         });
     }

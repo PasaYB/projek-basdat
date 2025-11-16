@@ -1,17 +1,17 @@
 @extends('adminlte::page')
 
-@section('title', 'Pesanan List')
+@section('title', 'Bahan Keluar List')
 
 @section('content_header')
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Manajemen Pesanan</h1>
+                <h1>Manajemen Bahan Keluar</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item active">Pesanan</li>
+                    <li class="breadcrumb-item active">Bahan Keluar</li>
                 </ol>
             </div>
         </div>
@@ -25,34 +25,34 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Daftar Pesanan</h3>
+                            <h3 class="card-title">Daftar Bahan Keluar</h3>
                         </div>
                         <div class="card-body">
                             <table id="example2" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Nama Pesanan</th>
-                                        <th>Tanggal Pemesanan</th>
-                                        <th>Total Harga</th>
-                                        <th>Status</th>
+                                        <th>Nama Bahan</th>
+                                        <th>Jumlah</th>
+                                        <th>Tanggal Keluar</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($orders as $order)
+                                    @foreach($material_outs as $material_out)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $order->name }}</td>
-                                        <td>{{ $order->address }}</td>
+                                        <td>{{ $material_out->ingredient->name }}</td>
+                                        <td>{{ $material_out->quantity }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($material_out->out_date)->format('d F Y') }}</td>
                                         <td>
-                                            <a href="{{ route('orders.show', $order->id) }}" class="btn btn-secondary btn-sm">
+                                            <a href="{{ route('material_outs.show', $material_out->id) }}" class="btn btn-secondary btn-sm">
                                                 <i class="fas fa-eye"></i>
                                             </a>
-                                            <a href="{{ route('orders.edit', $order->id) }}" class="btn btn-info btn-sm">
+                                            <a href="{{ route('material_outs.edit', $material_out->id) }}" class="btn btn-info btn-sm">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-                                            <form action="{{ route('orders.destroy', $order->id) }}" method="POST" style="display:inline;" class="delete-form">
+                                            <form action="{{ route('material_outs.destroy', $material_out->id) }}" method="POST" style="display:inline;" class="delete-form">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="button" class="btn btn-danger btn-sm delete-btn">
@@ -107,7 +107,7 @@
                     text: '<i class="fas fa-plus"></i> Add',
                     className: 'btn btn-sm btn-success',
                     action: function (e, dt, node, config) {
-                        window.location.href = '{{ route("orders.create") }}';
+                        window.location.href = '{{ route("material_outs.create") }}';
                     }
                 },
                 {
@@ -158,7 +158,7 @@
             ],
             language: {
                 search: "_INPUT_",
-                searchPlaceholder: "Search Pesanan..."
+                searchPlaceholder: "Search Bahan Keluar..."
             }
         });
 

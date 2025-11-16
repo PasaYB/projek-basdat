@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Add Pesanan')
+@section('title', 'Add Bahan Keluar')
 
 @section('adminlte_css')
     {{-- Select2 --}}
@@ -15,12 +15,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Manajemen Pesanan</h1>
+                <h1>Manajemen Bahan Keluar</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('orders.index') }}">Pesanan</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('material_outs.index') }}">Bahan Keluar</a></li>
                     <li class="breadcrumb-item active">Add</li>
                 </ol>
             </div>
@@ -31,167 +31,86 @@
 @section('content')
 <section class="content">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card card-navy">
-                    <div class="card-header">
-                        <h3 class="card-title">Tambahkan Pesanan Baru</h3>
-                    </div>
-                    <form action="{{ route('orders.store') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        @method('POST')
-                        
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label for="supplier_id">Supplier</label>
-                                <select class="form-control select2" id="supplier_id" name="supplier_id" required>
-                                    <option value=""> Pilih Supplier </option>
-                                    @foreach($suppliers as $supplier)
-                                        <option value="{{ $supplier->id }}" {{ old('supplier_id') == $supplier->id ? 'selected' : '' }}>
-                                            {{ $supplier->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('supplier_id')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="total_price">Total Harga</label>
-                                        <input type="text" class="form-control" id="total_price_display" 
-                                            placeholder="Masukkan Total Harga" 
-                                            value="{{ old('total_price') ? number_format(old('total_price'), 0, ',', '.') : '' }}">
-                                        <input type="hidden" id="total_price" name="total_price" value="{{ old('total_price') }}">
-                                        @error('total_price')
-                                            <small class="text-danger">{{ $message }}</small>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="order_date">Tanggal Pemesanan</label>
-                                        <div class="input-group" id="order_date_picker" data-td-target-input="nearest" data-td-target-toggle="nearest">
-                                            <input type="text" class="form-control" id="order_date" name="order_date" 
-                                                data-td-target="#order_date_picker" 
-                                                placeholder="" 
-                                                value="{{ old('order_date') }}" required>
-                                            <span class="input-group-text" data-td-target="#order_date_picker" data-td-toggle="datetimepicker">
-                                                <i class="fas fa-calendar"></i>
-                                            </span>
-                                        </div>
-                                        @error('order_date')
-                                            <small class="text-danger">{{ $message }}</small>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="status">Status</label>
-                                <select class="form-control select2" id="status" name="status" required>
-                                    <option value="">-- Pilih Status --</option>
-                                    <option value="pending" {{ old('status') == 'pending' ? 'selected' : '' }}>Pending</option>
-                                    <option value="processing" {{ old('status') == 'processing' ? 'selected' : '' }}>Processing</option>
-                                    <option value="completed" {{ old('status') == 'completed' ? 'selected' : '' }}>Completed</option>
-                                    <option value="cancelled" {{ old('status') == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
-                                </select>
-                                @error('status')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="card-footer">
-                            <a href="{{ route('orders.index') }}" class="btn btn-secondary">
-                                <i class="fas fa-arrow-left"></i>
-                            </a>
-                            <button type="submit" class="btn btn-success">
-                                <i class="fas fa-save"></i>
-                            </button>
-                        </div>
-                    </form>
-                </div>
+        <div class="card card-navy">
+            <div class="card-header">
+                <h3 class="card-title">Tambahkan Bahan Keluar Baru</h3>
             </div>
-
-            <div class="col-md-6">
-                <div class="card card-navy">
-                    <div class="card-header">
-                        <h3 class="card-title">Detail Pesanan</h3>
+            <form action="{{ route('material_outs.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('POST')
+                
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="ingredient_id">Bahan</label>
+                        <select class="form-control select2" id="ingredient_id" name="ingredient_id" required>
+                            <option value=""> Pilih Bahan </option>
+                            @foreach($materials as $material)
+                                <option value="{{ $material->ingredient_id }}" {{ old('ingredient_id') == $material->ingredient_id ? 'selected' : '' }}>
+                                    {{ $material->ingredient->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('ingredient_id')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
                     </div>
-                    <form action="{{ route('orders.store') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        @method('POST')
-                        
-                        <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-md-6">
                             <div class="form-group">
-                                <label for="supplier_id">Supplier</label>
-                                <select class="form-control select2" id="supplier_id" name="supplier_id" required>
-                                    <option value=""> Pilih Supplier </option>
-                                    @foreach($suppliers as $supplier)
-                                        <option value="{{ $supplier->id }}" {{ old('supplier_id') == $supplier->id ? 'selected' : '' }}>
-                                            {{ $supplier->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('supplier_id')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="total_price">Total Harga</label>
-                                        <input type="text" class="form-control" id="total_price_display" 
-                                            placeholder="Masukkan Total Harga" 
-                                            value="{{ old('total_price') ? number_format(old('total_price'), 0, ',', '.') : '' }}">
-                                        <input type="hidden" id="total_price" name="total_price" value="{{ old('total_price') }}">
-                                        @error('total_price')
-                                            <small class="text-danger">{{ $message }}</small>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="order_date">Tanggal Pemesanan</label>
-                                        <div class="input-group" id="order_date_picker" data-td-target-input="nearest" data-td-target-toggle="nearest">
-                                            <input type="text" class="form-control" id="order_date" name="order_date" 
-                                                data-td-target="#order_date_picker" 
-                                                placeholder="" 
-                                                value="{{ old('order_date') }}" required>
-                                            <span class="input-group-text" data-td-target="#order_date_picker" data-td-toggle="datetimepicker">
-                                                <i class="fas fa-calendar"></i>
-                                            </span>
-                                        </div>
-                                        @error('order_date')
-                                            <small class="text-danger">{{ $message }}</small>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="status">Status</label>
-                                <select class="form-control select2" id="status" name="status" required>
-                                    <option value="">-- Pilih Status --</option>
-                                    <option value="pending" {{ old('status') == 'pending' ? 'selected' : '' }}>Pending</option>
-                                    <option value="processing" {{ old('status') == 'processing' ? 'selected' : '' }}>Processing</option>
-                                    <option value="completed" {{ old('status') == 'completed' ? 'selected' : '' }}>Completed</option>
-                                    <option value="cancelled" {{ old('status') == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
-                                </select>
-                                @error('status')
+                                <label for="quantity">Jumlah</label>
+                                <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Masukkan Jumlah" value="{{ old('quantity') }}" required>
+                                <small id="stock_info" class="form-text text-muted"></small>
+                                @error('quantity')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
                         </div>
-                    </form>
+
+                        <div class="col-md-1">
+                            <label for="unit">Satuan</label>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="unit" name="unit" placeholder="-" value="{{ $material->ingredient->unit ?? '' }}" disabled>
+                            </div>
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="out_date">Tanggal Keluar</label>
+                                <div class="input-group" id="out_date_picker" data-td-target-input="nearest" data-td-target-toggle="nearest">
+                                    <input type="text" class="form-control" id="out_date_display" 
+                                        data-td-target="#out_date_picker" 
+                                        placeholder="" 
+                                        value="{{ old('out_date') ? \Carbon\Carbon::parse(old('out_date'))->format('d/m/Y') : '' }}" required readonly>
+                                    <input type="hidden" id="out_date" name="out_date" value="{{ old('out_date') }}">
+                                    <span class="input-group-text" data-td-target="#out_date_picker" data-td-toggle="datetimepicker">
+                                        <i class="fas fa-calendar"></i>
+                                    </span>
+                                </div>
+                                @error('out_date')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="note">Catatan</label>
+                        <textarea class="form-control" id="note" name="note" rows="3" placeholder="Masukkan catatan">{{ old('note') }}</textarea>
+                        @error('note')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
                 </div>
-            </div>
+
+                <div class="card-footer">
+                    <a href="{{ route('material_outs.index') }}" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-save"></i>
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </section>
@@ -207,6 +126,9 @@
 
     <script>
         $(document).ready(function() {
+            // Store material data
+            const materials = @json($materials);
+
             // Initialize Select2
             $('.select2').select2({
                 theme: 'bootstrap4',
@@ -216,8 +138,25 @@
                 }
             });
 
+            // Update unit when material is selected
+            $('#ingredient_id').on('change', function() {
+                const ingredientId = $(this).val();
+                if (ingredientId) {
+                    const material = materials.find(m => m.ingredient_id == ingredientId);
+                    if (material) {
+                        $('#unit').val(material.ingredient.unit);
+                        $('#stock_info').text('Stok tersedia: ' + material.quantity + ' ' + material.ingredient.unit);
+                        $('#quantity').attr('max', material.quantity);
+                    }
+                } else {
+                    $('#unit').val('');
+                    $('#stock_info').text('');
+                    $('#quantity').removeAttr('max');
+                }
+            });
+
             // Initialize Tempus Dominus for date picker
-            new tempusDominus.TempusDominus(document.getElementById('order_date_picker'), {
+            const picker = new tempusDominus.TempusDominus(document.getElementById('out_date_picker'), {
                 display: {
                     components: {
                         clock: false,
@@ -238,7 +177,17 @@
                     }
                 },
                 localization: {
-                    format: 'yyyy-MM-dd'
+                    format: 'dd/MM/yyyy'  // Display format
+                }
+            });
+
+            // Convert display format to backend format (yyyy-MM-dd)
+            picker.subscribe('change.td', (e) => {
+                if (e.date) {
+                    const year = e.date.year;
+                    const month = String(e.date.month + 1).padStart(2, '0');
+                    const day = String(e.date.date).padStart(2, '0');
+                    $('#out_date').val(`${year}-${month}-${day}`);
                 }
             });
 
