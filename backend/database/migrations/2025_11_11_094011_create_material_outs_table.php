@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('ingredient_id');
             $table->unsignedBigInteger('quantity');
-            // $table->string('unit');
             $table->date('out_date');
             $table->string('note')->nullable();
             $table->timestamps();

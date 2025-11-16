@@ -14,7 +14,6 @@ class MaterialOut extends Model
     protected $fillable = [
         'ingredient_id',
         'quantity',
-        'unit',
         'out_date',
         'note'
     ];

@@ -44,7 +44,7 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $material->ingredient->category->name }}</td>
                                         <td>{{ $material->ingredient->name }}</td>
-                                        <td>{{ $material->quantity }}</td>
+                                        <td>{{ $material->quantity }} {{ $material->ingredient->unit }}</td>
                                         <td><span class="badge {{ $material->status == 'available' ? 'badge-success' : 'badge-danger' }}">{{ $material->status }}</span></td>                                        {{-- <td>{{ $material->created_at->format('M d, Y') }}</td> --}}
                                         {{-- <td>
                                             <a href="{{ route('categories.show', $material->id) }}" class="btn btn-secondary btn-sm">

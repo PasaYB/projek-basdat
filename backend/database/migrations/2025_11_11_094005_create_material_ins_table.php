@@ -13,13 +13,10 @@ return new class extends Migration
     {
         Schema::create('material_ins', function (Blueprint $table) {
             $table->id();
-            // $table->unsignedBigInteger('supplier_id');
             $table->unsignedBigInteger('ingredient_id');
             $table->unsignedBigInteger('total_price');
             $table->unsignedBigInteger('quantity');
-            // $table->string('unit');
             $table->date('in_date');
-            // $table->date('expired_date');
             $table->string('note')->nullable();
             $table->timestamps();
         });

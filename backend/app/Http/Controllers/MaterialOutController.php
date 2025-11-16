@@ -56,8 +56,6 @@ class MaterialOutController extends Controller
             ])->withInput();
         }
 
-        $validated['unit'] = $material->unit;
-
         MaterialOut::create($validated);
 
         $material->quantity -= $validated['quantity'];
@@ -144,8 +142,6 @@ class MaterialOutController extends Controller
                 'out_date' => 'Tanggal keluar harus lebih besar dari tanggal masuk (' . \Carbon\Carbon::parse($materialIn->in_date)->format('d/m/Y') . ')'
             ])->withInput();
         }
-
-        $validated['unit'] = $newMaterial->unit;
 
         $material_out->update($validated);
 

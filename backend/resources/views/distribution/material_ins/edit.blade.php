@@ -71,7 +71,7 @@
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="unit">Satuan</label>
-                                <input type="text" class="form-control" id="unit" name="unit" placeholder="Satuan" value="{{ old('unit', $material_in->unit) }}" disabled>
+                                <input type="text" class="form-control" id="unit" placeholder="Satuan" value="{{ old('unit', $material_in->unit) }}" disabled>
                             </div>
                         </div>
 

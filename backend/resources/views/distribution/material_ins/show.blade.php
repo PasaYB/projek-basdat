@@ -47,7 +47,7 @@
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label font-weight-bold">Jumlah</label>
                         <div class="col-sm-10">
-                            <p class="form-control-plaintext">{{ $material_in->quantity }} {{ $material_in->unit }}</p>
+                            <p class="form-control-plaintext">{{ $material_in->quantity }} {{ $material_in->ingredient->unit }}</p>
                         </div>
                     </div>
                     </div>

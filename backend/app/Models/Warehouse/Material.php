@@ -13,12 +13,9 @@ class Material extends Model
     use HasFactory;
 
     protected $fillable = [
-        'category_id',
         'ingredient_id',
         'quantity',
-        'unit',
         'status',
-        'expired_at'
     ];
 
     public function ingredient()

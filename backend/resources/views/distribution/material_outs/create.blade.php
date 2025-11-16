@@ -70,7 +70,7 @@
                         <div class="col-md-1">
                             <label for="unit">Satuan</label>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="unit" name="unit" placeholder="-" value="{{ $material->ingredient->unit ?? '' }}" disabled>
+                                <input type="text" class="form-control" id="unit" placeholder="-" value="{{ $material->ingredient->unit ?? '' }}" disabled>
                             </div>
                         </div>
 

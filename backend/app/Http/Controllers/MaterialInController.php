@@ -41,8 +41,6 @@ class MaterialInController extends Controller
 
         $ingredient = Ingredient::findOrFail($validated['ingredient_id']);
 
-        $validated['supplier_id'] = $ingredient->supplier_id;
-        $validated['unit'] = $ingredient->unit;
         $validated['total_price'] = $ingredient->price_per_unit * $validated['quantity'];
 
         // simpan data bahan masuk
@@ -57,10 +55,7 @@ class MaterialInController extends Controller
             // tambahkan stoknya
             $material->ingredient_id = $in->ingredient->id;
             $material->quantity = ($material->quantity ?? 0) + $in->quantity;
-            $material->category_id = $in->ingredient->category_id;
-            $material->unit = $in->unit;
             $material->status = $material->quantity > 0 ? 'available' : 'unavailable';
-            $material->expired_at = '2025-12-31';
             $material->save();
         });
 
@@ -109,8 +104,6 @@ class MaterialInController extends Controller
 
             // ambil data ingredient (supplier_id, price_per_unit, unit)
             $ingredient = Ingredient::findOrFail($validated['ingredient_id']);
-            $validated['supplier_id'] = $ingredient->supplier_id;
-            $validated['unit'] = $ingredient->unit;
             $validated['total_price'] = $ingredient->price_per_unit * $validated['quantity'];
 
             // update data bahan masuk
@@ -123,7 +116,6 @@ class MaterialInController extends Controller
 
             $material->quantity = ($material->quantity ?? 0) + $diff;
             $material->status = $material->quantity > 0 ? 'available' : 'unavailable';
-            $material->expired_at = $validated['expired_at'] ?? $material->expired_at;
             $material->save();
         });
         return redirect()->route('material_ins.index')->with('success', 'Material In updated successfully.');

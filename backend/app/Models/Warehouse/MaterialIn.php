@@ -12,11 +12,9 @@ class MaterialIn extends Model
     use HasFactory;
 
     protected $fillable = [
-        'supplier_id',
         'ingredient_id',
         'total_price',
         'quantity',
-        'unit',
         'in_date',
         'note'
     ];

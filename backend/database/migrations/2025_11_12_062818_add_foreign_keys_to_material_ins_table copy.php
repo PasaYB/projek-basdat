@@ -6,13 +6,12 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
+    /**w
      * Run the migrations.
      */
     public function up(): void
     {
         Schema::table('material_ins', function (Blueprint $table) {
-            $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('cascade');
             $table->foreign('ingredient_id')->references('id')->on('ingredients')->onDelete('cascade');
         });
     }
@@ -23,7 +22,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('material_ins', function (Blueprint $table) {
-            $table->dropForeign(['supplier_id']);
             $table->dropForeign(['ingredient_id']);
         });
     }

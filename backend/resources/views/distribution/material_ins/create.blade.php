@@ -69,7 +69,7 @@
                         <div class="col-md-1">
                             <label for="quantity">Satuan</label>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="unit" name="unit" placeholder="Satuan" value="{{ $ingredient->unit ?? '' }}" disabled>
+                                <input type="text" class="form-control" id="unit" placeholder="Satuan" value="{{ $ingredient->unit ?? '' }}" disabled>
                             </div>
                         </div>
 
