@@ -20,7 +20,7 @@ class MaterialOutController extends Controller
 
     public function create()
     {
-        $materials = Material::with('ingredient')
+        $materials = Material::with(['ingredient.unit'])
             ->where('quantity', '>', 0)
             ->get();
 
@@ -91,7 +91,7 @@ class MaterialOutController extends Controller
     {
         $material_out = MaterialOut::with('ingredient')->findOrFail($id);
         
-        $materials = Material::with('ingredient')
+        $materials = Material::with(['ingredient.unit'])
             ->where('quantity', '>', 0)
             ->orWhere('ingredient_id', $material_out->ingredient_id)
             ->get();

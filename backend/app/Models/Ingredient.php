@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Unit;
 use App\Models\Supplier;
 use App\Models\Warehouse\Category;
 use App\Models\Warehouse\Material;
@@ -20,7 +21,7 @@ class Ingredient extends Model
     protected $fillable = [
         'name',
         'quantity',
-        'unit',
+        'unit_id',
         'category_id',
         'supplier_id',
         'price_per_unit',
@@ -40,6 +41,10 @@ class Ingredient extends Model
     // {
     //     return $this->hasMany(Material::class, 'ingredient_id');
     // }
+    public function unit()
+    {
+        return $this->belongsTo(Unit::class, 'unit_id');
+    }
 
     public function category()
     {

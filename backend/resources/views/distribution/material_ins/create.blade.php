@@ -69,7 +69,7 @@
                         <div class="col-md-1">
                             <label for="quantity">Satuan</label>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="unit" placeholder="Satuan" value="{{ $ingredient->unit ?? '' }}" disabled>
+                                <input type="text" class="form-control" id="unit" placeholder="" value="" disabled>
                             </div>
                         </div>
 
@@ -143,7 +143,7 @@
                 if (ingredientId) {
                     const ingredient = ingredients.find(i => i.id == ingredientId);
                     if (ingredient) {
-                        $('#unit').val(ingredient.unit);
+                        $('#unit').val(ingredient.unit.code);
                     }
                 } else {
                     $('#unit').val('');

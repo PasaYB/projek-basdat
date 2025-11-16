@@ -1,17 +1,17 @@
 @extends('adminlte::page')
 
-@section('title', 'Daftar Bahan Gudang')
+@section('title', 'Daftar Satuan')
 
 @section('content_header')
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Manajemen Bahan Gudang</h1>
+                <h1>Manajemen Satuan</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item active">Bahan Gudang</li>
+                    <li class="breadcrumb-item active">Satuan</li>
                 </ol>
             </div>
         </div>
@@ -25,42 +25,36 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Daftar Bahan Gudang</h3>
+                            <h3 class="card-title">Daftar Satuan</h3>
                         </div>
                         <div class="card-body">
                             <table id="example2" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Kategori</th>   
-                                        <th>Nama Bahan</th>
-                                        <th>Stok</th>
-                                        <th>Status</th>
+                                        <th>Kode</th>
+                                        <th>Nama</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($materials as $material)
+                                    @foreach($units as $unit)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $material->ingredient->category->name }}</td>
-                                        <td>{{ $material->ingredient->name }}</td>
-                                        <td>{{ $material->quantity }} {{ $material->ingredient->unit->code }}</td>
-                                        <td><span class="badge {{ $material->status == 'available' ? 'badge-success' : 'badge-danger' }}">{{ $material->status }}</span></td>                                        {{-- <td>{{ $material->created_at->format('M d, Y') }}</td> --}}
-                                        {{-- <td>
-                                            <a href="{{ route('categories.show', $material->id) }}" class="btn btn-secondary btn-sm">
-                                                <i class="fas fa-eye"></i>
-                                            </a>
-                                            <a href="{{ route('categories.edit', $material->id) }}" class="btn btn-info btn-sm">
+                                        <td>{{ $unit->code }}</td>
+                                        <td>{{ $unit->name }}</td>
+                                        <td>
+                                            <a href="{{ route('units.edit', $unit->id) }}" class="btn btn-info btn-sm">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-                                            <form action="{{ route('categories.destroy', $material->id) }}" method="POST" style="display:inline;" class="delete-form">
+                                            <form action="{{ route('units.destroy', $unit->id) }}" method="POST" style="display:inline;" class="delete-form">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="button" class="btn btn-danger btn-sm delete-btn">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                             </form>
-                                        </td> --}}
+                                        </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -104,6 +98,13 @@
             responsive: true,
             dom: '<"row"<"col-sm-12 col-md-6"B><"col-sm-12 col-md-6"f>>rtip',
             buttons: [
+                {
+                    text: '<i class="fas fa-plus"></i> Add',
+                    className: 'btn btn-sm btn-success',
+                    action: function (e, dt, node, config) {
+                        window.location.href = '{{ route("units.create") }}';
+                    }
+                },
                 {
                     extend: 'copy',
                     text: '<i class="fas fa-copy"></i> Copy',
@@ -152,9 +153,28 @@
             ],
             language: {
                 search: "_INPUT_",
-                searchPlaceholder: "Search kategori..."
+                searchPlaceholder: "Search satuan..."
             }
         });
+
+        @if(session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: '{{ session('success') }}',
+                timer: 3000,
+                confirmButtonText: 'OK'
+            });
+        @endif
+
+        @if(session('error'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Error!',
+                text: '{{ session('error') }}',
+                confirmButtonText: 'OK'
+            });
+        @endif
 
         // SweetAlert2 for delete confirmation
         $(document).on('click', '.delete-btn', function(e) {

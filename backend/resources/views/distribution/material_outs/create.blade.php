@@ -70,7 +70,7 @@
                         <div class="col-md-1">
                             <label for="unit">Satuan</label>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="unit" placeholder="-" value="{{ $material->ingredient->unit ?? '' }}" disabled>
+                                <input type="text" class="form-control" id="unit" placeholder="" value="" disabled>
                             </div>
                         </div>
 
@@ -144,8 +144,8 @@
                 if (ingredientId) {
                     const material = materials.find(m => m.ingredient_id == ingredientId);
                     if (material) {
-                        $('#unit').val(material.ingredient.unit);
-                        $('#stock_info').text('Stok tersedia: ' + material.quantity + ' ' + material.ingredient.unit);
+                        $('#unit').val(material.ingredient.unit.code);
+                        $('#stock_info').text('Stok tersedia: ' + material.quantity + ' ' + material.ingredient.unit.code);
                         $('#quantity').attr('max', material.quantity);
                         
                         // Set minDate restriction based on latest in_date

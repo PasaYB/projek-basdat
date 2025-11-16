@@ -43,7 +43,7 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $material_out->ingredient->name }}</td>
-                                        <td>{{ $material_out->quantity }} {{ $material_out->ingredient->unit }}</td>
+                                        <td>{{ $material_out->quantity }} {{ $material_out->ingredient->unit->code }}</td>
                                         <td>{{ \Carbon\Carbon::parse($material_out->out_date)->format('d F Y') }}</td>
                                         <td>
                                             <a href="{{ route('material_outs.show', $material_out->id) }}" class="btn btn-secondary btn-sm">

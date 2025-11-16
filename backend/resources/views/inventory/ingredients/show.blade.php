@@ -40,7 +40,7 @@
                         <hr>
 
                         <strong><i class="fas fa-balance-scale mr-2"></i>  Satuan</strong>
-                        <p class="text-muted mt-2">{{ $ingredient->unit }}</p>
+                        <p class="text-muted mt-2">{{ $ingredient->unit->name }}</p>
                     </div>
                 </div>
                 <div class="card card-navy">

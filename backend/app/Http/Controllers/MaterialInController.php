@@ -24,7 +24,7 @@ class MaterialInController extends Controller
 
     public function create()
     {
-        $ingredients = Ingredient::with('supplier')->get();
+        $ingredients = Ingredient::with(['supplier', 'unit'])->get();
 
         // dd($ingredients);
         return view('distribution.material_ins.create', compact('ingredients'));
@@ -78,7 +78,7 @@ class MaterialInController extends Controller
 
     public function edit($id)
     {
-        $ingredients = Ingredient::with('supplier')->get();
+        $ingredients = Ingredient::with('supplier', 'unit')->get();
         $material_in = MaterialIn::findOrFail($id);
         
         return view('distribution.material_ins.edit', compact('material_in', 'ingredients'));

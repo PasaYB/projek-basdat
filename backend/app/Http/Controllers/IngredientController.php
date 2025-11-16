@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Unit;
 use App\Models\Supplier;
 use App\Models\Ingredient;
 use Illuminate\Http\Request;
@@ -23,6 +24,7 @@ class IngredientController extends Controller
         return view('inventory.ingredients.create', [
             'categories' => Category::all(),
             'suppliers' => Supplier::all(),
+            'units' => Unit::all(),
         ]);
     }
 
@@ -32,7 +34,7 @@ class IngredientController extends Controller
             'name' => 'required|string|max:255|unique:ingredients,name',
             'category_id' => 'required|exists:categories,id',
             'supplier_id' => 'required|exists:suppliers,id',
-            'unit' => 'required|string|max:50',
+            'unit_id' => 'required|exists:units,id',
             'price_per_unit' => 'required|numeric|min:0',
             'description' => 'nullable|string',
         ]);
@@ -55,6 +57,7 @@ class IngredientController extends Controller
             'ingredient' => Ingredient::findOrFail($id),
             'categories' => Category::all(),
             'suppliers' => Supplier::all(),
+            'units' => Unit::all(),
         ]);
     }
 
@@ -64,7 +67,7 @@ class IngredientController extends Controller
             'name' => 'required|string|max:255|unique:ingredients,name,' . $id,
             'category_id' => 'required|exists:categories,id',
             'supplier_id' => 'required|exists:suppliers,id',
-            'unit' => 'required|string|max:50',
+            'unit_id' => 'required|exists:units,id',
             'price_per_unit' => 'required|numeric|min:0',
             'description' => 'nullable|string',
         ]);

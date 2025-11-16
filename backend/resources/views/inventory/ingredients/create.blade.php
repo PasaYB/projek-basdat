@@ -47,13 +47,6 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="unit">Unit</label>
-                        <input type="text" class="form-control" id="unit" name="unit" placeholder="Masukkan Unit" value="{{ old('unit') }}" required>
-                        @error('unit')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
-                    <div class="form-group">
                         <label for="price_per_unit">Harga Satuan</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
@@ -63,6 +56,20 @@
                             <input type="hidden" id="price_per_unit" name="price_per_unit" value="{{ old('price_per_unit') }}">
                         </div>
                         @error('price_per_unit')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="unit_id">Satuan</label>
+                        <select class="form-control select2" id="unit_id" name="unit_id" required>
+                            <option value=""> Pilih Satuan </option>
+                            @foreach($units as $unit)
+                                <option value="{{ $unit->id }}" {{ old('unit_id') == $unit->id ? 'selected' : '' }}>
+                                    {{ $unit->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('unit_id')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>

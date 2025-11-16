@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
             $table->foreignId('supplier_id')->constrained('suppliers')->onDelete('cascade');
             $table->unsignedBigInteger('price_per_unit');
-            $table->string('unit');
+            $table->unsignedBigInteger('unit_id');
             $table->timestamps();
         });
     }

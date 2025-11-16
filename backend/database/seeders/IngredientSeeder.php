@@ -16,7 +16,7 @@ class IngredientSeeder extends Seeder
             // === Kategori 1: Daging & Ikan ===
             [
                 'name' => 'Daging Sapi Segar',
-                'unit' => 'kg',
+                'unit_id' => 1,
                 'category_id' => 1,
                 'supplier_id' => 1,
                 'price_per_unit' => 120000,
@@ -25,7 +25,7 @@ class IngredientSeeder extends Seeder
             ],
             [
                 'name' => 'Daging Ayam Fillet',
-                'unit' => 'kg',
+                'unit_id' => 1,
                 'category_id' => 1,
                 'supplier_id' => 2,
                 'price_per_unit' => 65000,
@@ -34,7 +34,7 @@ class IngredientSeeder extends Seeder
             ],
             [
                 'name' => 'Ikan Kembung',
-                'unit' => 'kg',
+                'unit_id' => 1,
                 'category_id' => 1,
                 'supplier_id' => 3,
                 'price_per_unit' => 55000,
@@ -43,7 +43,7 @@ class IngredientSeeder extends Seeder
             ],
             [
                 'name' => 'Udang Kupas',
-                'unit' => 'kg',
+                'unit_id' => 1,
                 'category_id' => 1,
                 'supplier_id' => 4,
                 'price_per_unit' => 90000,
@@ -52,7 +52,7 @@ class IngredientSeeder extends Seeder
             ],
             [
                 'name' => 'Daging Cincang',
-                'unit' => 'kg',
+                'unit_id' => 1,
                 'category_id' => 1,
                 'supplier_id' => 5,
                 'price_per_unit' => 95000,
@@ -63,7 +63,7 @@ class IngredientSeeder extends Seeder
             // === Kategori 2: Sayuran ===
             [
                 'name' => 'Wortel',
-                'unit' => 'kg',
+                'unit_id' => 1,
                 'category_id' => 2,
                 'supplier_id' => 6,
                 'price_per_unit' => 15000,
@@ -72,7 +72,7 @@ class IngredientSeeder extends Seeder
             ],
             [
                 'name' => 'Brokoli',
-                'unit' => 'kg',
+                'unit_id' => 1,
                 'category_id' => 2,
                 'supplier_id' => 7,
                 'price_per_unit' => 25000,
@@ -81,7 +81,7 @@ class IngredientSeeder extends Seeder
             ],
             [
                 'name' => 'Kacang Panjang',
-                'unit' => 'ikat',
+                'unit_id' => 1,
                 'category_id' => 2,
                 'supplier_id' => 8,
                 'price_per_unit' => 7000,
@@ -90,7 +90,7 @@ class IngredientSeeder extends Seeder
             ],
             [
                 'name' => 'Bayam',
-                'unit' => 'ikat',
+                'unit_id' => 1,
                 'category_id' => 2,
                 'supplier_id' => 9,
                 'price_per_unit' => 6000,
@@ -99,7 +99,7 @@ class IngredientSeeder extends Seeder
             ],
             [
                 'name' => 'Bawang Daun',
-                'unit' => 'ikat',
+                'unit_id' => 1,
                 'category_id' => 2,
                 'supplier_id' => 10,
                 'price_per_unit' => 8000,
@@ -110,7 +110,7 @@ class IngredientSeeder extends Seeder
             // === Kategori 3: Bumbu ===
             [
                 'name' => 'Bawang Merah',
-                'unit' => 'kg',
+                'unit_id' => 1,
                 'category_id' => 3,
                 'supplier_id' => 1,
                 'price_per_unit' => 32000,
@@ -119,7 +119,7 @@ class IngredientSeeder extends Seeder
             ],
             [
                 'name' => 'Bawang Putih',
-                'unit' => 'kg',
+                'unit_id' => 1,
                 'category_id' => 3,
                 'supplier_id' => 2,
                 'price_per_unit' => 28000,
@@ -128,7 +128,7 @@ class IngredientSeeder extends Seeder
             ],
             [
                 'name' => 'Cabe Merah',
-                'unit' => 'kg',
+                'unit_id' => 1,
                 'category_id' => 3,
                 'supplier_id' => 3,
                 'price_per_unit' => 40000,
@@ -137,7 +137,7 @@ class IngredientSeeder extends Seeder
             ],
             [
                 'name' => 'Lengkuas',
-                'unit' => 'kg',
+                'unit_id' => 1,
                 'category_id' => 3,
                 'supplier_id' => 4,
                 'price_per_unit' => 15000,
@@ -146,7 +146,7 @@ class IngredientSeeder extends Seeder
             ],
             [
                 'name' => 'Jahe',
-                'unit' => 'kg',
+                'unit_id' => 1,
                 'category_id' => 3,
                 'supplier_id' => 5,
                 'price_per_unit' => 20000,
@@ -155,7 +155,7 @@ class IngredientSeeder extends Seeder
             ],
             [
                 'name' => 'Kunyit',
-                'unit' => 'kg',
+                'unit_id' => 1,
                 'category_id' => 3,
                 'supplier_id' => 6,
                 'price_per_unit' => 18000,
@@ -166,7 +166,7 @@ class IngredientSeeder extends Seeder
             // === Kategori 4: Minuman ===
             [
                 'name' => 'Susu Cair',
-                'unit' => 'liter',
+                'unit_id' => 2,
                 'category_id' => 4,
                 'supplier_id' => 7,
                 'price_per_unit' => 20000,
@@ -175,7 +175,7 @@ class IngredientSeeder extends Seeder
             ],
             [
                 'name' => 'Sirup Rasa Melon',
-                'unit' => 'liter',
+                'unit_id' => 2,
                 'category_id' => 4,
                 'supplier_id' => 8,
                 'price_per_unit' => 18000,
@@ -184,7 +184,7 @@ class IngredientSeeder extends Seeder
             ],
             [
                 'name' => 'Kopi Bubuk',
-                'unit' => 'gram',
+                'unit_id' => 3,
                 'category_id' => 4,
                 'supplier_id' => 9,
                 'price_per_unit' => 90000,
@@ -193,7 +193,7 @@ class IngredientSeeder extends Seeder
             ],
             [
                 'name' => 'Teh Celup',
-                'unit' => 'kotak',
+                'unit_id' => 4,
                 'category_id' => 4,
                 'supplier_id' => 10,
                 'price_per_unit' => 12000,
@@ -202,7 +202,7 @@ class IngredientSeeder extends Seeder
             ],
             [
                 'name' => 'Gula Cair',
-                'unit' => 'liter',
+                'unit_id' => 2,
                 'category_id' => 4,
                 'supplier_id' => 1,
                 'price_per_unit' => 16000,
@@ -213,7 +213,7 @@ class IngredientSeeder extends Seeder
             // === Kategori 5: Bahan Pokok ===
             [
                 'name' => 'Beras Premium',
-                'unit' => 'kg',
+                'unit_id' => 1,
                 'category_id' => 5,
                 'supplier_id' => 2,
                 'price_per_unit' => 14000,
@@ -222,7 +222,7 @@ class IngredientSeeder extends Seeder
             ],
             [
                 'name' => 'Gula Pasir',
-                'unit' => 'kg',
+                'unit_id' => 1,
                 'category_id' => 5,
                 'supplier_id' => 3,
                 'price_per_unit' => 16000,
@@ -231,7 +231,7 @@ class IngredientSeeder extends Seeder
             ],
             [
                 'name' => 'Minyak Goreng',
-                'unit' => 'liter',
+                'unit_id' => 2,
                 'category_id' => 5,
                 'supplier_id' => 4,
                 'price_per_unit' => 22000,
@@ -240,7 +240,7 @@ class IngredientSeeder extends Seeder
             ],
             [
                 'name' => 'Tepung Terigu',
-                'unit' => 'kg',
+                'unit_id' => 1,
                 'category_id' => 5,
                 'supplier_id' => 5,
                 'price_per_unit' => 13000,
@@ -249,7 +249,7 @@ class IngredientSeeder extends Seeder
             ],
             [
                 'name' => 'Garam Halus',
-                'unit' => 'kg',
+                'unit_id' => 1,
                 'category_id' => 5,
                 'supplier_id' => 6,
                 'price_per_unit' => 8000,

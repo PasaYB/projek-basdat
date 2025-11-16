@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Edit Kategori')
+@section('title', 'Tambah Satuan')
 
 @section('adminlte_css')
 
@@ -8,13 +8,13 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Edit Kategori</h1>
+                <h1>Tambah Satuan Baru</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('categories.index') }}">Kategori</a></li>
-                    <li class="breadcrumb-item active">Edit</li>
+                    <li class="breadcrumb-item"><a href="{{ route('units.index') }}">Satuan</a></li>
+                    <li class="breadcrumb-item active">Tambah</li>
                 </ol>
             </div>
         </div>
@@ -26,33 +26,33 @@
     <div class="container-fluid">
         <div class="card card-navy">
             <div class="card-header">
-            <h3 class="card-title">Edit Kategori</h3>
+            <h3 class="card-title">Tambah Satuan</h3>
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form action="{{ route('categories.update', $category->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('units.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                @method('PUT')
+                @method('POST')
                 
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="name">Nama</label>
-                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name', $category->name) }}" placeholder="Masukkan Nama">
-                        @error('name')
+                        <label for="code">Kode</label>
+                        <input type="text" class="form-control @error('code') is-invalid @enderror" id="code" name="code" value="{{ old('code') }}" placeholder="Masukkan Kode">
+                        @error('code')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="description">Deskripsi</label>
-                        <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" rows="3" placeholder="Masukkan Deskripsi">{{ old('description', $category->description) }}</textarea>
-                        @error('description')
+                        <label for="name">Nama</label>
+                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" placeholder="Masukkan Nama">
+                        @error('name')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
                 </div>
 
                 <div class="card-footer">
-                    <a href="{{ route('categories.index') }}" class="btn btn-secondary">
+                    <a href="{{ route('units.index') }}" class="btn btn-secondary">
                         <i class="fas fa-arrow-left"></i>
                     </a>
                     <button type="submit" class="btn btn-success">

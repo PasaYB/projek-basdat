@@ -70,7 +70,7 @@
                         <div class="col-md-1">
                             <label for="unit">Satuan</label>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="unit" placeholder="-" value="{{ old('unit', $material_out->unit) }}" disabled>
+                                <input type="text" class="form-control" id="unit" placeholder="-" value="{{ old('unit', $material_out->ingredient->unit->code) }}" disabled>
                             </div>
                         </div>
 
@@ -181,11 +181,11 @@
                 if (ingredientId) {
                     const material = materials.find(m => m.ingredient_id == ingredientId);
                     if (material) {
-                        $('#unit').val(material.ingredient.unit);
+                        $('#unit').val(material.ingredient.unit.code);
                         
                         // Show available stock (add current out quantity back for editing)
                         const availableStock = material.quantity + (ingredientId == currentIngredientId ? {{ $material_out->quantity }} : 0);
-                        $('#stock_info').text('Stok tersedia: ' + availableStock + ' ' + material.ingredient.unit);
+                        $('#stock_info').text('Stok tersedia: ' + availableStock + ' ' + material.ingredient.unit.code);
                         $('#quantity').attr('max', availableStock);
                         
                         // Set minDate restriction based on latest in_date

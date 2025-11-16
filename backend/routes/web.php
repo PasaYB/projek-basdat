@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UnitController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\SupplierController;
@@ -31,6 +32,7 @@ Route::middleware(['auth:employee'])->group(function () {
 
     Route::prefix('inventory')->group(function () {
         Route::resource('categories', CategoryController::class);
+        Route::resource('units', UnitController::class);
         Route::resource('ingredients', IngredientController::class);
         Route::resource('materials', MaterialController::class);
     });

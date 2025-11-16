@@ -36,7 +36,7 @@
                         <hr>
 
                         <strong><i class="fas fa-balance-scale mr-2"></i> Jumlah</strong>
-                        <p class="text-muted mt-2">{{ $material_out->quantity }} {{ $material_out->ingredient->unit }}</p>
+                        <p class="text-muted mt-2">{{ $material_out->quantity }} {{ $material_out->ingredient->unit->code }}</p>
                         <hr>
 
                         <strong><i class="fas fa-calendar mr-2"></i> Tanggal Keluar</strong>
