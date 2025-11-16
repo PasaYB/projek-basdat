@@ -133,6 +133,11 @@
                             <h3>{{ $employees->count() }}</h3>
                             <p>Petugas</p>
                         </div>
+                        <div class="ribbon-wrapper">
+                            <div class="ribbon bg-primary">
+                            RAWRRR
+                            </div>
+                        </div>
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
                         </div>

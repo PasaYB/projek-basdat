@@ -2,8 +2,9 @@
 
 namespace App\Models\Warehouse;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Ingredient;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Category extends Model
 {
@@ -14,4 +15,9 @@ class Category extends Model
         'name',
         'description',
     ];
+
+    public function ingredients()
+    {
+        return $this->hasMany(Ingredient::class, 'category_id');
+    }
 }

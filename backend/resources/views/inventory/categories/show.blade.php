@@ -30,17 +30,24 @@
             </div>
             <div class="card-body">
                 <div class="form-horizontal">
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label font-weight-bold">Nama</label>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-form-label font-weight-bold">
+                            <i class="fas fa-tag mr-2"></i>
+                            Nama
+                        </label>
                         <div class="col-sm-10">
-                            <p class="form-control-plaintext">{{ $category->name }}</p>
+                            <p class="text-muted mt-2">{{ $category->name }}</p>
                         </div>
                     </div>
 
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label font-weight-bold">Deskripsi</label>
+                    <hr>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-form-label font-weight-bold">
+                            <i class="fas fa-sticky-note mr-2"></i>
+                            Deskripsi
+                        </label>
                         <div class="col-sm-10">
-                            <p class="form-control-plaintext">{{ $category->description }}</p>
+                            <p class="text-muted mt-2">{{ $category->description }}</p>
                         </div>
                     </div>
                 </div>

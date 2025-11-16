@@ -30,27 +30,37 @@
             </div>
             <div class="card-body">
                 <div class="form-horizontal">
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label font-weight-bold">Nama Supplier</label>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-form-label font-weight-bold">
+                            <i class="fas fa-box mr-2"></i>
+                            Nama Supplier
+                        </label>
                         <div class="col-sm-10">
-                            <p class="form-control-plaintext">{{ $supplier->name }}</p>
+                            <p class="text-muted mt-2">{{ $supplier->name }}</p>
                         </div>
                     </div>
+                    <hr>
 
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label font-weight-bold">Nomor Telepon</label>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-form-label font-weight-bold">
+                            <i class="fas fa-phone mr-2"></i>
+                            Nomor Telepon
+                        </label>
                         <div class="col-sm-10">
-                            <p class="form-control-plaintext">{{ $supplier->phone_number }}</p>
+                            <p class="text-muted mt-2">{{ $supplier->phone_number }}</p>
                         </div>
                     </div>
+                    <hr>
 
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label font-weight-bold">Alamat</label>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-form-label font-weight-bold">
+                            <i class="fas fa-map-marker-alt mr-2"></i>
+                            Alamat
+                        </label>
                         <div class="col-sm-10">
-                            <p class="form-control-plaintext">{{ $supplier->address }}</p>
+                            <p class="text-muted mt-2">{{ $supplier->address }}</p>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

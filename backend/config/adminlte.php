@@ -403,12 +403,17 @@ return [
                 [
                     'text' => 'Bahan',
                     'url' => 'inventory/ingredients',
-                    'icon' => 'fas fa-solid fa-boxes',
+                    'icon' => 'fas fa-solid fa-box-open',
                 ],
                 [
                     'text' => 'Kategori',
                     'url' => 'inventory/categories',
                     'icon' => 'fas fa-solid fa-tags',
+                ],
+                [
+                    'text' => 'Satuan',
+                    'url' => 'inventory/units',
+                    'icon' => 'fas fa-solid fa-balance-scale',
                 ],
             ],
         ],

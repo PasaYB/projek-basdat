@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Order;
+use App\Models\Ingredient;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -17,8 +18,8 @@ class Supplier extends Model
         'address',
     ];
 
-    // public function orders()
+    // public function ingredients()
     // {
-    //     return $this->hasMany(Order::class);
+    //     return $this->hasMany(Ingredient::class, 'supplier_id');
     // }
 }
