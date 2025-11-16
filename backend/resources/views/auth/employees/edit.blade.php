@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Edit Employee')
+@section('title', 'Edit Petugas')
 
 @section('adminlte_css')
     <style>
@@ -74,31 +74,31 @@
 
                     <div class="card card-navy">
                         <div class="card-header">
-                            <h3 class="card-title">About Me</h3>
+                            <h3 class="card-title">Informasi Tambahan</h3>
                         </div>
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="phone_number"><i class="fas fa-phone mr-1"></i> Phone Number</label>
-                                <input type="text" class="form-control" id="phone_number" name="phone_number" value="{{ old('phone_number', $employee->phone_number) }}" placeholder="Enter phone number">
+                                <label for="phone_number"><i class="fas fa-phone mr-1"></i> Nomor Telepon</label>
+                                <input type="text" class="form-control" id="phone_number" name="phone_number" value="{{ old('phone_number', $employee->phone_number) }}" placeholder="Masukkan nomor telepon">
                             </div>
 
                             <div class="form-group">
-                                <label for="address"><i class="fas fa-map-marker-alt mr-1"></i> Address</label>
-                                <input type="text" class="form-control" id="address" name="address" value="{{ old('address', $employee->address) }}" placeholder="Enter address">
+                                <label for="address"><i class="fas fa-map-marker-alt mr-1"></i> Alamat</label>
+                                <input type="text" class="form-control" id="address" name="address" value="{{ old('address', $employee->address) }}" placeholder="Masukkan alamat">
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-md-9">
-                    <div class="card">
+                    <div class="card card-navy">
                         <div class="card-header">
-                            <h3 class="card-title">Employee Details</h3>
+                            <h3 class="card-title">Detail Petugas</h3>
                         </div>
                         <div class="card-body">
                             <div class="form-horizontal">
                                 <div class="form-group row">
-                                    <label for="name" class="col-sm-2 col-form-label">Name <span class="text-danger">*</span></label>
+                                    <label for="name" class="col-sm-2 col-form-label">Nama</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name', $employee->name) }}" required>
                                         @error('name')
@@ -126,32 +126,15 @@
                                 </div>
 
                                 <hr>
-
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Created At</label>
-                                    <div class="col-sm-10">
-                                        <p class="form-control-plaintext">{{ $employee->created_at->format('F d, Y h:i A') }}</p>
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Updated At</label>
-                                    <div class="col-sm-10">
-                                        <p class="form-control-plaintext">{{ $employee->updated_at->format('F d, Y h:i A') }}</p>
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <div class="col-sm-10 offset-sm-2">
-                                        <a href="{{ route('employees.show', $employee->id) }}" class="btn btn-secondary">
-                                            <i class="fas fa-times"></i>
-                                        </a>
-                                        <button type="submit" class="btn btn-success">
-                                            <i class="fas fa-save"></i> 
-                                        </button>
-                                    </div>
-                                </div>
                             </div>
+                        </div>
+                        <div class="card-footer">
+                            <a href="{{ route('employees.index') }}" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i>
+                            </a>
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-save"></i>
+                            </button>
                         </div>
                     </div>
                 </div>

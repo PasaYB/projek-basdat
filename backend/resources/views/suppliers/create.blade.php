@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Add Supplier')
+@section('title', 'Tambah Supplier')
 
 @section('adminlte_css')
 

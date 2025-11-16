@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Show Category')
+@section('title', 'Detail Kategori')
 
 @section('adminlte_css')
 
@@ -26,46 +26,34 @@
     <div class="container-fluid">
         <div class="card card-navy">
             <div class="card-header">
-            <h3 class="card-title">Category Detail</h3>
+            <h3 class="card-title">Detail Kategori</h3>
             </div>
             <div class="card-body">
                 <div class="form-horizontal">
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label font-weight-bold">Name</label>
+                        <label class="col-sm-2 col-form-label font-weight-bold">Nama</label>
                         <div class="col-sm-10">
                             <p class="form-control-plaintext">{{ $category->name }}</p>
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label font-weight-bold">Description</label>
+                        <label class="col-sm-2 col-form-label font-weight-bold">Deskripsi</label>
                         <div class="col-sm-10">
                             <p class="form-control-plaintext">{{ $category->description }}</p>
                         </div>
                     </div>
-
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label font-weight-bold">Created At</label>
-                        <div class="col-sm-10">
-                            <p class="form-control-plaintext">{{ $category->created_at->format('F d, Y h:i A') }}</p>
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label font-weight-bold">Updated At</label>
-                        <div class="col-sm-10">
-                            <p class="form-control-plaintext">{{ $category->updated_at->format('F d, Y h:i A') }}</p>
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="col-sm-10 offset-sm-2">
-                            <a href="{{ route('categories.index') }}" class="btn btn-secondary">
-                                <i class="fas fa-arrow-left"></i> 
-                            </a>
-                        </div>
-                    </div>
                 </div>
+            </div>
+        </div>
+        <div class="card card-navy">
+            <div class="card-body">
+                <a href="{{ route('categories.index') }}" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-warning">
+                    <i class="fas fa-edit"></i>
+                </a>
             </div>
         </div>
     </div>

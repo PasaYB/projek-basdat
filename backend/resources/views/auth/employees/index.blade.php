@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Employees List')
+@section('title', 'Daftar Petugas')
 
 @section('content_header')
     <div class="container-fluid">
@@ -32,9 +32,8 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Name</th>
-                                        <th>Address</th>
-                                        <th>Created At</th>
+                                        <th>Nama</th>
+                                        <th>Alamat</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -44,7 +43,6 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $employee->name }}</td>
                                         <td>{{ $employee->address ?? '-' }}</td>
-                                        <td>{{ $employee->created_at->format('M d, Y') }}</td>
                                         <td>
                                             <a href="{{ route('employees.show', $employee->id) }}" class="btn btn-secondary btn-sm">
                                                 <i class="fas fa-eye"></i>
@@ -154,6 +152,25 @@
                 searchPlaceholder: "Search petugas..."
             }
         });
+
+        @if(session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: '{{ session('success') }}',
+                timer: 3000,
+                confirmButtonText: 'OK'
+            });
+        @endif
+
+        @if(session('error'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Error!',
+                text: '{{ session('error') }}',
+                confirmButtonText: 'OK'
+            });
+        @endif
 
         // SweetAlert2 for delete confirmation
         $(document).on('click', '.delete-btn', function(e) {

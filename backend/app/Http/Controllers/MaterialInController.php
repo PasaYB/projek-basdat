@@ -6,6 +6,7 @@ use App\Models\Supplier;
 use App\Models\Ingredient;
 use Illuminate\Http\Request;
 use App\Models\Warehouse\Material;
+use App\Models\Warehouse\MaterialOut;
 use Illuminate\Support\Facades\DB;
 use App\Models\Warehouse\MaterialIn;
 
@@ -124,6 +125,13 @@ class MaterialInController extends Controller
     public function destroy($id)
     {
         $material_in = MaterialIn::findOrFail($id);
+
+        // Check if ingredient has any material_out records
+        $hasOutgoing = MaterialOut::where('ingredient_id', $material_in->ingredient_id)->exists();
+
+        if ($hasOutgoing) {
+            return redirect()->route('material_ins.index')->with('error', 'Tidak dapat menghapus data bahan masuk. Bahan ini sudah memiliki riwayat pengeluaran.');
+        }
 
         DB::transaction(function () use ($material_in) {
             // kurangi stok di gudang

@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Employee Details')
+@section('title', 'Detail Petugas')
 
 @section('adminlte_css')
     <style>
@@ -63,18 +63,18 @@
 
                 <div class="card card-navy">
                     <div class="card-header">
-                        <h3 class="card-title">About Me</h3>
+                        <h3 class="card-title">Informasi Tambahan</h3>
                     </div>
                     <div class="card-body">
-                        <strong><i class="fas fa-book mr-1"></i> Phone Number</strong>
+                        <strong><i class="fas fa-book mr-1"></i> Nomor Telepon</strong>
                         <p class="text-muted">
-                            {{ $employee->phone_number ?? 'Not assigned yet' }}
+                            {{ $employee->phone_number ?? 'Belum ditemukan' }}
                         </p>
 
                         <hr>
 
-                        <strong><i class="fas fa-map-marker-alt mr-1"></i> Address</strong>
-                        <p class="text-muted">{{ $employee->address ?? 'Not assigned yet' }}</p>
+                        <strong><i class="fas fa-map-marker-alt mr-1"></i> Alamat</strong>
+                        <p class="text-muted">{{ $employee->address ?? 'Belum ditemukan' }}</p>
 
                         <hr>
                     </div>
@@ -82,44 +82,49 @@
             </div>
 
             <div class="col-md-9">
-                <div class="card">
+                <div class="card card-navy">
                     <div class="card-header">
-                        <h3 class="card-title">Employee Details</h3>
+                        <h3 class="card-title">Detail Petugas</h3>
                     </div>
                     <div class="card-body">
                         <div class="form-horizontal">
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label font-weight-bold">Name</label>
+                                <label class="col-sm-2 col-form-label font-weight-bold">Nama</label>
                                 <div class="col-sm-10">
                                     <p class="form-control-plaintext">{{ $employee->name }}</p>
                                 </div>
                             </div>
 
+                            <hr>
+
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label font-weight-bold">Created At</label>
+                                <label class="col-sm-2 col-form-label font-weight-bold">Dibuat Pada</label>
                                 <div class="col-sm-10">
                                     <p class="form-control-plaintext">{{ $employee->created_at->format('F d, Y h:i A') }}</p>
                                 </div>
                             </div>
 
+                            <hr>
+
                             <div class="form-group row">
-                                <label class="col-sm-2 col-form-label font-weight-bold">Updated At</label>
+                                <label class="col-sm-2 col-form-label font-weight-bold">Diperbarui Pada</label>
                                 <div class="col-sm-10">
                                     <p class="form-control-plaintext">{{ $employee->updated_at->format('F d, Y h:i A') }}</p>
                                 </div>
                             </div>
 
-                            <div class="form-group row">
-                                <div class="col-sm-10 offset-sm-2">
-                                    <a href="{{ route('employees.index') }}" class="btn btn-secondary">
-                                        <i class="fas fa-arrow-left"></i> 
-                                    </a>
-                                    <a href="{{ route('employees.edit', $employee->id) }}" class="btn btn-primary">
-                                        <i class="fas fa-edit"></i> 
-                                    </a>
-                                </div>
-                            </div>
+                            <hr>
                         </div>
+                    </div>   
+                </div>
+                <div class="card card-navy">
+                    <div class="card-body">
+                        <a href="{{ route('employees.index') }}" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i>
+                        </a>
+                        <a href="{{ route('employees.edit', $employee->id) }}" class="btn btn-warning">
+                            <i class="fas fa-edit"></i>
+                        </a>
                     </div>
                 </div>
             </div>

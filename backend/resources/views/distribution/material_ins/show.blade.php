@@ -24,68 +24,82 @@
 @section('content')
 <section class="content">
     <div class="container-fluid">
-        <div class="card card-navy">
-            <div class="card-header">
-            <h3 class="card-title">Detail Bahan Masuk</h3>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card card-navy">
+                    <div class="card-header">
+                        <h3 class="card-title">Detail Bahan Masuk</h3>
+                    </div>
+                    <div class="card-body">
+                        <strong><i class="fas fa-leaf mr-2"></i> Nama Bahan</strong>
+                        <p class="text-muted">{{ $material_in->ingredient->name }}</p>
+                        <hr>
+
+                        <strong><i class="fas fa-balance-scale mr-2"></i> Jumlah</strong>
+                        <p class="text-muted">{{ $material_in->quantity }} {{ $material_in->ingredient->unit }}</p>
+                        <hr>
+
+                        <strong><i class="fas fa-calendar mr-2"></i> Tanggal Masuk</strong>
+                        <p class="text-muted">{{ \Carbon\Carbon::parse($material_in->in_date)->format('d F Y') }}</p>
+                        <hr>
+
+                        <strong><i class="fas fa-sticky-note mr-2"></i> Catatan</strong>
+                        <p class="text-muted">{{ $material_in->note ?? 'Tidak ada catatan' }}</p>
+                    </div>
+                </div>
+
+                <div class="card card-navy">
+                    <div class="card-header">
+                        <h3 class="card-title">Detail Kategori</h3>
+                    </div>
+                    <div class="card-body">
+                        <strong><i class="fas fa-box mr-2"></i> Jenis</strong>
+                        <p class="text-muted">{{ $material_in->ingredient->category->name }}</p>
+                        <hr>
+                    </div>
+                </div>
+                
+                <div class="card card-navy">
+                    <div class="card-body">
+                        <a href="{{ route('material_ins.index') }}" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i>
+                        </a>
+                        <a href="{{ route('material_ins.edit', $material_in->id) }}" class="btn btn-warning">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-                <div class="form-horizontal">
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label font-weight-bold">Nama Supplier</label>
-                        <div class="col-sm-10">
-                            <p class="form-control-plaintext">{{ $material_in->ingredient->supplier->name }}</p>
-                        </div>
-                    </div>
 
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label font-weight-bold">Nama Bahan</label>
-                        <div class="col-sm-10">
-                            <p class="form-control-plaintext">{{ $material_in->ingredient->name }}</p>
-                        </div>
+            <div class="col-md-6">
+                <div class="card card-navy">
+                    <div class="card-header">
+                        <h3 class="card-title">Detail Harga</h3>
                     </div>
+                    <div class="card-body">
+                        <strong><i class="fas fa-money-bill-wave mr-2"></i> Harga Satuan</strong>
+                        <p class="text-muted">Rp {{ number_format($material_in->ingredient->price_per_unit, 0, ',', '.') }}</p>
+                        <hr>
 
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label font-weight-bold">Jumlah</label>
-                        <div class="col-sm-10">
-                            <p class="form-control-plaintext">{{ $material_in->quantity }} {{ $material_in->ingredient->unit }}</p>
-                        </div>
+                        <strong><i class="fas fa-calculator mr-2"></i> Total Harga</strong>
+                        <p class="text-muted">Rp {{ number_format($material_in->total_price, 0, ',', '.') }}</p>
                     </div>
+                </div>
+                <div class="card card-navy">
+                    <div class="card-header">
+                        <h3 class="card-title">Detail Supplier</h3>
                     </div>
+                    <div class="card-body">
+                        <strong><i class="fas fa-box mr-2"></i> Nama Supplier</strong>
+                        <p class="text-muted">{{ $material_in->ingredient->supplier->name }}</p>
+                        <hr>
 
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label font-weight-bold">Harga Satuan</label>
-                        <div class="col-sm-10">
-                            <p class="form-control-plaintext">{{ number_format($material_in->ingredient->price_per_unit, 2, ',', '.') }}</p>
-                        </div>
-                    </div>
+                        <strong><i class="fas fa-phone mr-2"></i> Nomor Telepon</strong>
+                        <p class="text-muted">{{ $material_in->ingredient->supplier->phone_number }}</p>
+                        <hr>
 
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label font-weight-bold">Total Harga</label>
-                        <div class="col-sm-10">
-                            <p class="form-control-plaintext">{{ number_format($material_in->total_price, 2, ',', '.') }}</p>
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label font-weight-bold">Tanggal Masuk</label>
-                        <div class="col-sm-10">
-                            <p class="form-control-plaintext">{{ \Carbon\Carbon::parse($material_in->in_date)->format('d F Y') }}</p>
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label font-weight-bold">Catatan</label>
-                        <div class="col-sm-10">
-                            <p class="form-control-plaintext">{{ $material_in->note ?? '-'}}</p>
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="col-sm-10 offset-sm-2">
-                            <a href="{{ route('material_ins.index') }}" class="btn btn-secondary">
-                                <i class="fas fa-arrow-left"></i> 
-                            </a>
-                        </div>
+                        <strong><i class="fas fa-map-marker-alt mr-2"></i> Alamat</strong>
+                        <p class="text-muted">{{ $material_in->ingredient->supplier->address }}</p>
                     </div>
                 </div>
             </div>

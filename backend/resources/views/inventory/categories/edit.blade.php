@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Edit Category')
+@section('title', 'Edit Kategori')
 
 @section('adminlte_css')
 
@@ -26,7 +26,7 @@
     <div class="container-fluid">
         <div class="card card-navy">
             <div class="card-header">
-            <h3 class="card-title">Edit Category</h3>
+            <h3 class="card-title">Edit Kategori</h3>
             </div>
             <!-- /.card-header -->
             <!-- form start -->
@@ -36,14 +36,14 @@
                 
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="name">Name</label>
+                        <label for="name">Nama</label>
                         <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name', $category->name) }}" placeholder="Enter Name">
                         @error('name')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="description">Description</label>
+                        <label for="description">Deskripsi</label>
                         <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" rows="3" placeholder="Enter description">{{ old('description', $category->description) }}</textarea>
                         @error('description')
                             <small class="text-danger">{{ $message }}</small>

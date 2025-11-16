@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Add Category')
+@section('title', 'Tambah Kategori')
 
 @section('adminlte_css')
 
@@ -8,7 +8,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Add Category</h1>
+                <h1>Tambah Kategori</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -26,7 +26,7 @@
     <div class="container-fluid">
         <div class="card card-navy">
             <div class="card-header">
-            <h3 class="card-title">Insert New Category</h3>
+            <h3 class="card-title">Tambah Kategori Baru</h3>
             </div>
             <!-- /.card-header -->
             <!-- form start -->

@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Show Supplier')
+@section('title', 'Detail Supplier')
 
 @section('adminlte_css')
 
@@ -53,12 +53,15 @@
 
                 </div>
             </div>
-            <div class="form-group row mt-8">
-                <div class="col-sm-10 mx-4">
-                    <a href="{{ route('suppliers.index') }}" class="btn btn-secondary">
-                        <i class="fas fa-arrow-left"></i> 
-                    </a>
-                </div>
+        </div>
+        <div class="card card-navy">
+            <div class="card-body">
+                <a href="{{ route('suppliers.index') }}" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <a href="{{ route('suppliers.edit', $supplier->id) }}" class="btn btn-warning">
+                    <i class="fas fa-edit"></i>
+                </a>
             </div>
         </div>
     </div>

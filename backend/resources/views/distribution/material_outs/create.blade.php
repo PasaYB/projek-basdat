@@ -147,11 +147,27 @@
                         $('#unit').val(material.ingredient.unit);
                         $('#stock_info').text('Stok tersedia: ' + material.quantity + ' ' + material.ingredient.unit);
                         $('#quantity').attr('max', material.quantity);
+                        
+                        // Set minDate restriction based on latest in_date
+                        if (material.latest_in_date) {
+                            picker.updateOptions({
+                                restrictions: {
+                                    minDate: new tempusDominus.DateTime(material.latest_in_date)
+                                }
+                            });
+                        }
                     }
                 } else {
                     $('#unit').val('');
                     $('#stock_info').text('');
                     $('#quantity').removeAttr('max');
+                    
+                    // Remove date restriction
+                    picker.updateOptions({
+                        restrictions: {
+                            minDate: undefined
+                        }
+                    });
                 }
             });
 

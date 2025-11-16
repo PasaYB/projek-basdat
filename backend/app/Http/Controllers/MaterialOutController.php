@@ -24,6 +24,14 @@ class MaterialOutController extends Controller
             ->where('quantity', '>', 0)
             ->get();
 
+        // Add latest in_date to each material
+        $materials->each(function($material) {
+            $latestMaterialIn = MaterialIn::where('ingredient_id', $material->ingredient_id)
+                ->orderBy('in_date', 'desc')
+                ->first();
+            $material->latest_in_date = $latestMaterialIn ? $latestMaterialIn->in_date : null;
+        });
+
         // dd($materials);
         return view('distribution.material_outs.create', compact('materials'));
     }

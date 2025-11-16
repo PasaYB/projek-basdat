@@ -371,7 +371,7 @@ return [
                     'icon' => 'fas fa-solid fa-list',
                 ],
                 [
-                    'text' => 'Bahan Baku',
+                    'text' => 'Bahan Gudang',
                     'url' => 'inventory/materials',
                     'icon' => 'fas fa-solid fa-boxes',
                 ],

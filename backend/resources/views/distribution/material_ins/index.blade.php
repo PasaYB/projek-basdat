@@ -164,7 +164,25 @@
             }
         });
 
-        // SweetAlert2 for delete confirmation
+        @if(session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: '{{ session('success') }}',
+                timer: 3000,
+                confirmButtonText: 'OK'
+            });
+        @endif
+
+        @if(session('error'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Error!',
+                text: '{{ session('error') }}',
+                confirmButtonText: 'OK'
+            });
+        @endif
+
         $(document).on('click', '.delete-btn', function(e) {
             e.preventDefault();
             var form = $(this).closest('form');
