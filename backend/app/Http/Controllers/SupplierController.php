@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Supplier;
+use App\Models\Ingredient;
 use Illuminate\Http\Request;
 
 class SupplierController extends Controller
@@ -29,7 +30,7 @@ class SupplierController extends Controller
         
         Supplier::create($request->all());
         
-        return redirect()->route('suppliers.index')->with('success', 'Supplier created successfully.');
+        return redirect()->route('suppliers.index')->with('success', 'Supplier berhasil dibuat.');
     }
 
     public function show($id)
@@ -58,13 +59,19 @@ class SupplierController extends Controller
         
         $supplier->update($request->all());
         
-        return redirect()->route('suppliers.index')->with('success', 'Supplier updated successfully.');
+        return redirect()->route('suppliers.index')->with('success', 'Supplier berhasil diperbarui.');
     }
     public function destroy($id)
     {
         $supplier = Supplier::findOrFail($id);
+
+        if (Ingredient::where('supplier_id', $supplier->id)->exists()) {
+            return redirect()
+                ->route('suppliers.index')
+                ->with('error', 'Tidak dapat menghapus supplier. Supplier ini masih digunakan oleh beberapa bahan.');
+        }
         $supplier->delete();
         
-        return redirect()->route('suppliers.index')->with('success', 'Supplier deleted successfully.');
+        return redirect()->route('suppliers.index')->with('success', 'Supplier berhasil dihapus.');
     }
 }

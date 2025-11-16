@@ -366,11 +366,6 @@ return [
             'icon' => 'fas fa-fw fa-warehouse',
             'submenu' => [
                 [
-                    'text' => 'Kategori',
-                    'url' => 'inventory/categories',
-                    'icon' => 'fas fa-solid fa-list',
-                ],
-                [
                     'text' => 'Bahan Gudang',
                     'url' => 'inventory/materials',
                     'icon' => 'fas fa-solid fa-boxes',
@@ -399,6 +394,22 @@ return [
                 //         ],
                 //     ],
                 // ],
+            ],
+        ],
+        [
+            'text' => 'Daftar',
+            'icon' => 'fas fa-fw fa-list',
+            'submenu' => [
+                [
+                    'text' => 'Bahan',
+                    'url' => 'inventory/ingredients',
+                    'icon' => 'fas fa-solid fa-boxes',
+                ],
+                [
+                    'text' => 'Kategori',
+                    'url' => 'inventory/categories',
+                    'icon' => 'fas fa-solid fa-tags',
+                ],
             ],
         ],
         // [

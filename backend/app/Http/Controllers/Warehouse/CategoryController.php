@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Warehouse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Warehouse\Category;
+use App\Models\Ingredient;
 
 class CategoryController extends Controller
 {
@@ -29,7 +30,7 @@ class CategoryController extends Controller
         
         Category::create($request->all());
         
-        return redirect()->route('categories.index')->with('success', 'Category created successfully.');
+        return redirect()->route('categories.index')->with('success', 'Kategori berhasil dibuat.');
     }
 
     public function show($id)
@@ -57,14 +58,21 @@ class CategoryController extends Controller
         
         $category->update($request->all());
         
-        return redirect()->route('categories.index')->with('success', 'Category updated successfully.');
+        return redirect()->route('categories.index')->with('success', 'Kategori berhasil diperbarui.');
     }
     
     public function destroy($id)
     {
         $category = Category::findOrFail($id);
+        
+        if (Ingredient::where('category_id', $category->id)->exists()) {
+            return redirect()
+                ->route('categories.index')
+                ->with('error', 'Tidak dapat menghapus kategori. Kategori ini masih digunakan oleh beberapa bahan.');
+        }
+        
         $category->delete();
         
-        return redirect()->route('categories.index')->with('success', 'Category deleted successfully.');
+        return redirect()->route('categories.index')->with('success', 'Kategori berhasil dihapus.');
     }
 }
