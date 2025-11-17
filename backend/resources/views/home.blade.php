@@ -77,6 +77,11 @@
     </style>
 @stop
 
+@section('adminlte_css')
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+@endsection
+
 @section('content')
     <div class="content-header">
         <div class="container-fluid">
@@ -104,7 +109,7 @@
                             <p>Kategori</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-bag"></i>
+                            <i class="ion ion-pricetags"></i>
                         </div>
                         <a href="{{ route('categories.index') }}" class="small-box-footer">
                             More info <i class="fas fa-arrow-circle-right"></i>
@@ -119,7 +124,7 @@
                             <p>Supplier</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-stats-bars"></i>
+                            <i class="ion ion-cube"></i>
                         </div>
                         <a href="{{ route('suppliers.index') }}" class="small-box-footer">
                             More info <i class="fas fa-arrow-circle-right"></i>
@@ -134,12 +139,12 @@
                             <p>Petugas</p>
                         </div>
                         <div class="ribbon-wrapper">
-                            <div class="ribbon bg-primary">
+                            <div class="ribbon bg-navy">
                             RAWRRR
                             </div>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-person-add"></i>
+                            <i class="ion ion-person"></i>
                         </div>
                         <a href="{{ route('employees.index') }}" class="small-box-footer">
                             More info <i class="fas fa-arrow-circle-right"></i>
@@ -154,7 +159,7 @@
                             <p>Bahan Gudang</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-pie-graph"></i>
+                            <i class="ion ion-clipboard"></i>
                         </div>
                         <a href="{{ route('materials.index') }}" class="small-box-footer">
                             More info <i class="fas fa-arrow-circle-right"></i>
@@ -163,40 +168,136 @@
                 </div>
             </div>
 
-            {{-- <div class="row">
-                <div class="col-lg-7">
-                    <div class="card bg-gradient-navy">
-                        <div class="card-header border-0">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card card-navy">
+                        <div class="card-header">
                             <h3 class="card-title">
-                                <i class="far fa-calendar-alt"></i>
-                                Calendar
+                                Stok Bahan Gudang
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="materialStockChart" style="height: 300px;"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="card card-navy">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                Distribusi Kategori
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="categoryChart" style="height: 300px;"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card card-navy">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                Bahan Masuk Terbaru
                             </h3>
                             <div class="card-tools">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-navy btn-sm dropdown-toggle" data-toggle="dropdown" data-offset="-52">
-                                        <i class="fas fa-bars"></i>
-                                    </button>
-                                    <div class="dropdown-menu" role="menu">
-                                        <a href="#" class="dropdown-item">Add new event</a>
-                                        <a href="#" class="dropdown-item">Clear events</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a href="#" class="dropdown-item">View calendar</a>
-                                    </div>
-                                </div>
-                                <button type="button" class="btn btn-navy btn-sm" data-card-widget="collapse">
+                                <a href="{{ route('material_ins.index') }}" class="btn btn-sm btn-navy">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                     <i class="fas fa-minus"></i>
                                 </button>
-                                <button type="button" class="btn btn-navy btn-sm" data-card-widget="remove">
+                                <button type="button" class="btn btn-tool" data-card-widget="remove">
                                     <i class="fas fa-times"></i>
                                 </button>
                             </div>
                         </div>
-                        <div class="card-body pt-0">
-                            <div id="calendar"></div>
+                        <div class="card-body p-0">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 10px">No</th>
+                                        <th>Nama Bahan</th>
+                                        <th>Jumlah</th>
+                                        <th>Tanggal Masuk</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse($recentMaterialIns as $index => $materialIn)
+                                        <tr>
+                                            <td>{{ $index + 1 }}</td>
+                                            <td>{{ $materialIn->ingredient->name ?? '-' }}</td>
+                                            <td>
+                                                <span class="badge badge-success">
+                                                    {{ $materialIn->quantity }} {{ $materialIn->ingredient->unit->code ?? '' }}
+                                                </span>
+                                            </td>
+                                            <td>{{ $materialIn->in_date ? \Carbon\Carbon::parse($materialIn->in_date)->format('d M Y') : '-' }}</td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="6" class="text-center">Belum ada data bahan masuk</td>
+                                        </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
-            </div> --}}
+                <div class="col-md-6">
+                    <div class="card card-navy">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                Bahan Keluar Terbaru
+                            </h3>
+                            <div class="card-tools">
+                                <a href="{{ route('material_outs.index') }}" class="btn btn-sm btn-navy">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body p-0">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 10px">No</th>
+                                        <th>Nama Bahan</th>
+                                        <th>Jumlah</th>
+                                        <th>Tanggal Keluar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse($recentMaterialOuts as $index => $materialOut)
+                                        <tr>
+                                            <td>{{ $index + 1 }}</td>
+                                            <td>{{ $materialOut->ingredient->name ?? '-' }}</td>
+                                            <td>
+                                                <span class="badge badge-danger">
+                                                    {{ $materialOut->quantity }} {{ $materialOut->ingredient->unit->code ?? '' }}
+                                                </span>
+                                            </td>
+                                            <td>{{ $materialOut->out_date ? \Carbon\Carbon::parse($materialOut->out_date)->format('d M Y') : '-' }}</td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="6" class="text-center">Belum ada data bahan masuk</td>
+                                        </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 @endsection
@@ -204,26 +305,86 @@
 @section('page_js')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            var calendarEl = document.getElementById('calendar');
+            // Material Stock Chart (Bar Chart)
+            const materialStockCtx = document.getElementById('materialStockChart').getContext('2d');
+            const materials = @json($materials);
             
-            if (calendarEl && typeof FullCalendar !== 'undefined') {
-                var calendar = new FullCalendar.Calendar(calendarEl, {
-                    initialView: 'dayGridMonth',
-                    events: [
-                        {
-                            title: 'Meeting',
-                            start: '2025-11-15',
-                            end: '2025-11-16'
-                        },
-                        {
-                            title: 'Conference',
-                            start: '2025-11-20',
-                            end: '2025-11-22'
+            const materialLabels = materials.map(m => m.ingredient ? m.ingredient.name : 'Unknown');
+            const materialQuantities = materials.map(m => m.quantity);
+            
+            new Chart(materialStockCtx, {
+                type: 'bar',
+                data: {
+                    labels: materialLabels,
+                    datasets: [{
+                        label: 'Stok',
+                        data: materialQuantities,
+                        backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1
+                            }
                         }
-                    ]
-                });
-                calendar.render();
-            }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        title: {
+                            display: false
+                        }
+                    }
+                }
+            });
+
+            // Category Chart (Doughnut Chart)
+            const categoryCtx = document.getElementById('categoryChart').getContext('2d');
+            const categories = @json($categories);
+            
+            const categoryLabels = categories.map(c => c.name);
+            const categoryCounts = categories.map(c => c.ingredients_count || 0);
+            const categoryColors = [
+                'rgba(255, 99, 132, 0.6)',
+                'rgba(54, 162, 235, 0.6)',
+                'rgba(255, 206, 86, 0.6)',
+                'rgba(75, 192, 192, 0.6)',
+                'rgba(153, 102, 255, 0.6)',
+                'rgba(255, 159, 64, 0.6)',
+                'rgba(199, 199, 199, 0.6)',
+                'rgba(83, 102, 255, 0.6)'
+            ];
+            
+            new Chart(categoryCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: categoryLabels,
+                    datasets: [{
+                        label: 'Jumlah Bahan',
+                        data: categoryCounts,
+                        backgroundColor: categoryColors.slice(0, categoryLabels.length),
+                        borderColor: categoryColors.slice(0, categoryLabels.length).map(c => c.replace('0.6', '1')),
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
         });
     </script>
 @stop

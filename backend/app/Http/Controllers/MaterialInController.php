@@ -48,16 +48,16 @@ class MaterialInController extends Controller
 
         $validated['total_price'] = $ingredient->price_per_unit * $validated['quantity'];
 
-        // simpan data bahan masuk
+        // transaction
         DB::transaction(function () use ($validated) {
             $in = MaterialIn::create($validated);
 
-            // cari bahan di gudang, kalau belum ada buat baru
+            // find or make new
             $material = Material::firstOrNew([
                 'ingredient_id' => $in->ingredient_id,
             ]);
 
-            // tambahkan stoknya
+            // add stock to material warehouse
             $material->last_updated_by = $validated['created_by'];
             $material->ingredient_id = $in->ingredient->id;
             $material->quantity = ($material->quantity ?? 0) + $in->quantity;
@@ -65,7 +65,7 @@ class MaterialInController extends Controller
             $material->save();
         });
 
-        return redirect()->route('material_ins.index')->with('success', 'Material in record created successfully.');
+        return redirect()->route('material_ins.index')->with('success', 'Data Bahan Masuk berhasil disimpan.');
 
     }
 
@@ -96,28 +96,18 @@ class MaterialInController extends Controller
         ]);
 
         $validated['created_by'] = auth()->id();
-
-        // $ingredient = Ingredient::findOrFail($validated['ingredient_id']);
-
-        // $validated['supplier_id'] = $ingredient->supplier_id;
-        // $validated['unit'] = $ingredient->unit;
-        // $validated['total_price'] = $ingredient->price_per_unit * $validated['quantity'];
-
-        // $material_in->update($validated);
         
         DB::transaction(function () use ($in, $validated) {
-            // hitung selisih jumlah lama dan baru
+            // compare nett
             $oldQuantity = $in->quantity;
             $diff = $validated['quantity'] - $oldQuantity;
 
-            // ambil data ingredient (supplier_id, price_per_unit, unit)
             $ingredient = Ingredient::findOrFail($validated['ingredient_id']);
             $validated['total_price'] = $ingredient->price_per_unit * $validated['quantity'];
 
-            // update data bahan masuk
             $in->update($validated);
 
-            // update stok di gudang
+            // stock update
             $material = Material::firstOrNew([
                 'ingredient_id' => $in->ingredient_id,
             ]);
@@ -127,22 +117,20 @@ class MaterialInController extends Controller
             $material->status = $material->quantity > 0 ? 'available' : 'unavailable';
             $material->save();
         });
-        return redirect()->route('material_ins.index')->with('success', 'Material In updated successfully.');
+        return redirect()->route('material_ins.index')->with('success', 'Data Bahan Masuk berhasil diperbarui.');
     }
     
     public function destroy($id)
     {
         $material_in = MaterialIn::findOrFail($id);
 
-        // Check if ingredient has any material_out records
-        $hasOutgoing = MaterialOut::where('ingredient_id', $material_in->ingredient_id)->exists();
-
-        if ($hasOutgoing) {
-            return redirect()->route('material_ins.index')->with('error', 'Tidak dapat menghapus data bahan masuk. Bahan ini sudah memiliki riwayat pengeluaran.');
+        if (MaterialOut::where('ingredient_id', $material_in->ingredient_id)->exists()) {
+            return redirect()
+                ->route('material_ins.index')
+                ->with('error', 'Tidak dapat menghapus data bahan masuk. Bahan ini sudah memiliki riwayat pengeluaran.');
         }
 
         DB::transaction(function () use ($material_in) {
-            // kurangi stok di gudang
             $material = Material::where('ingredient_id', $material_in->ingredient_id)->first();
 
             if ($material) {
@@ -156,9 +144,8 @@ class MaterialInController extends Controller
                 $material->save();
             }
 
-            // hapus data bahan masuk
             $material_in->delete();
         });        
-        return redirect()->route('material_ins.index')->with('success', 'Material In deleted successfully.');
+        return redirect()->route('material_ins.index')->with('success', 'Data Bahan Masuk berhasil dihapus.');
     }
 }

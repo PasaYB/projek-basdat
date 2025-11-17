@@ -77,7 +77,7 @@ class MaterialOutController extends Controller
 
         $material->save();
 
-        return redirect()->route('material_outs.index')->with('success', 'Material out record created successfully.');
+        return redirect()->route('material_outs.index')->with('success', 'Data Bahan Keluar berhasil disimpan.');
     }
 
     public function show($id)
@@ -166,14 +166,13 @@ class MaterialOutController extends Controller
         }
         $newMaterial->save();
 
-        return redirect()->route('material_outs.index')->with('success', 'Material out updated successfully.');
+        return redirect()->route('material_outs.index')->with('success', 'Data Bahan Keluar berhasil diperbarui.');
     }
 
     public function destroy($id)
     {
         $material_out = MaterialOut::findOrFail($id);
         
-        // Restore the quantity back to material stock
         $material = Material::where('ingredient_id', $material_out->ingredient_id)->first();
         if ($material) {
             $material->quantity += $material_out->quantity;
@@ -185,7 +184,7 @@ class MaterialOutController extends Controller
         
         $material_out->delete();
         
-        return redirect()->route('material_outs.index')->with('success', 'Material out deleted successfully.');
+        return redirect()->route('material_outs.index')->with('success', 'Data Bahan Keluar berhasil dihapus.');
     }
 
 }

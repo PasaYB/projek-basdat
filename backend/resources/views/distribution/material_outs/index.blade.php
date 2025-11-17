@@ -158,7 +158,7 @@
             ],
             language: {
                 search: "_INPUT_",
-                searchPlaceholder: "Search Bahan Keluar..."
+                searchPlaceholder: "Search data..."
             }
         });
 
