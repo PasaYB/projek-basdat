@@ -90,17 +90,15 @@ class MaterialOutController extends Controller
         return redirect()->route('material_outs.index')->with('success', 'Data Bahan Keluar berhasil disimpan.');
     }
 
-    public function show($id)
+    public function show(MaterialOut $material_out)
     {
-        $material_out = MaterialOut::with('ingredient')->findOrFail($id);
+        // $material_out = MaterialOut::with('ingredient')->findOrFail($id);
         
         return view('distribution.material_outs.show', compact('material_out'));
     }
 
-    public function edit($id)
-    {
-        $material_out = MaterialOut::with('ingredient')->findOrFail($id);
-        
+    public function edit(MaterialOut $material_out)
+    {        
         $materials = Material::with(['ingredient.unit'])
             ->where('quantity', '>', 0)
             ->orWhere('ingredient_id', $material_out->ingredient_id)

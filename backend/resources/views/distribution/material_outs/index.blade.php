@@ -46,10 +46,10 @@
                                         <td>{{ $material_out->quantity }} {{ $material_out->ingredient->unit->code }}</td>
                                         <td>{{ \Carbon\Carbon::parse($material_out->out_date)->format('d F Y') }}</td>
                                         <td>
-                                            <a href="{{ route('material_outs.show', $material_out->id) }}" class="btn btn-secondary btn-sm">
+                                            <a href="{{ route('material_outs.show', $material_out->slug) }}" class="btn btn-secondary btn-sm">
                                                 <i class="fas fa-eye"></i>
                                             </a>
-                                            <a href="{{ route('material_outs.edit', $material_out->id) }}" class="btn btn-info btn-sm">
+                                            <a href="{{ route('material_outs.edit', $material_out->slug) }}" class="btn btn-info btn-sm">
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                             <form action="{{ route('material_outs.destroy', $material_out->id) }}" method="POST" style="display:inline;" class="delete-form">

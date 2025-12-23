@@ -13,6 +13,7 @@ class Employee extends Authenticatable
     protected $fillable = [
         'name',
         'password',
+        'slug',
         'address',
         'phone_number',
         'profile_image'
@@ -38,5 +39,19 @@ class Employee extends Authenticatable
         return [
             'password' => 'hashed',
         ];
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($employee) {
+            $employee->slug = Str::slug($employee->name, '-');
+        });
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }

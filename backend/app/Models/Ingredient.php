@@ -21,6 +21,7 @@ class Ingredient extends Model
     protected $fillable = [
         'name',
         'quantity',
+        'slug',
         'unit_id',
         'category_id',
         'supplier_id',
@@ -54,5 +55,19 @@ class Ingredient extends Model
     public function supplier()
     {
         return $this->belongsTo(Supplier::class, 'supplier_id');
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($ingredient) {
+            $ingredient->slug = Str::slug($ingredient->name, '-');
+        });
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }

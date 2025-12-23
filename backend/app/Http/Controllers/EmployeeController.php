@@ -14,16 +14,16 @@ class EmployeeController extends Controller
         return view('auth.employees.index', compact('employees'));
     }
 
-    public function show($id)
+    public function show(Employee $employee)
     {
-        $employee = Employee::findOrFail($id);
+        // $employee = Employee::findOrFail(Employee $employee);
         
         return view('auth.employees.show', compact('employee'));
     }
 
-    public function edit($id)
+    public function edit(Employee $employee)
     {
-        $employee = Employee::findOrFail($id);
+        // $employee = Employee::findOrFail(Employee $employee);
         
         return view('auth.employees.edit', compact('employee'));
     }

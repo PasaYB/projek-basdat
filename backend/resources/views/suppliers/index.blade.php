@@ -44,10 +44,10 @@
                                         <td>{{ $supplier->name }}</td>
                                         <td>{{ $supplier->address }}</td>
                                         <td>
-                                            <a href="{{ route('suppliers.show', $supplier->id) }}" class="btn btn-secondary btn-sm">
+                                            <a href="{{ route('suppliers.show', $supplier->slug) }}" class="btn btn-secondary btn-sm">
                                                 <i class="fas fa-eye"></i>
                                             </a>
-                                            <a href="{{ route('suppliers.edit', $supplier->id) }}" class="btn btn-info btn-sm">
+                                            <a href="{{ route('suppliers.edit', $supplier->slug) }}" class="btn btn-info btn-sm">
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                             <form action="{{ route('suppliers.destroy', $supplier->id) }}" method="POST" style="display:inline;" class="delete-form">

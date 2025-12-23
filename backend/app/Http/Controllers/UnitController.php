@@ -33,9 +33,9 @@ class UnitController extends Controller
         return redirect()->route('units.index')->with('success', 'Unit created successfully.');
     }
 
-    public function edit($id)
+    public function edit(Unit $unit)
     {
-        $unit = Unit::findOrFail($id);
+        // $unit = Unit::findOrFail($id);
 
         return view('inventory.units.edit', compact('unit'));
     }

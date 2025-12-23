@@ -44,17 +44,17 @@ class IngredientController extends Controller
         return redirect()->route('ingredients.index')->with('success', 'Bahan berhasil dibuat.');
     }
 
-    public function show($id)
+    public function show(Ingredient $ingredient)
     {
-        $ingredient = Ingredient::findOrFail($id);
+        // $ingredient = Ingredient::findOrFail(Ingredient $ingredient);
         
         return view('inventory.ingredients.show', compact('ingredient'));
     }
 
-    public function edit($id)
+    public function edit(Ingredient $ingredient)
     {        
         return view('inventory.ingredients.edit', [
-            'ingredient' => Ingredient::findOrFail($id),
+            // 'ingredient' => Ingredient::findOrFail(Ingredient $ingredient),
             'categories' => Category::all(),
             'suppliers' => Supplier::all(),
             'units' => Unit::all(),

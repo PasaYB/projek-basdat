@@ -4,6 +4,7 @@ namespace App\Models\Warehouse;
 
 use App\Models\Employee;
 use App\Models\Ingredient;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -15,6 +16,7 @@ class MaterialOut extends Model
     protected $fillable = [
         'ingredient_id',
         'quantity',
+        'slug',
         'out_date',
         'note',
         'created_by'
@@ -28,5 +30,18 @@ class MaterialOut extends Model
     public function employees()
     {
         return $this->belongsTo(Employee::class, 'created_by');
+    }
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($material_out) {
+            $material_out->slug = Str::slug(uniqid());
+        });
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }

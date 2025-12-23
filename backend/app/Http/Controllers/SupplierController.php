@@ -33,16 +33,16 @@ class SupplierController extends Controller
         return redirect()->route('suppliers.index')->with('success', 'Supplier berhasil dibuat.');
     }
 
-    public function show($id)
+    public function show(Supplier $supplier)
     {
-        $supplier = Supplier::findOrFail($id);
+        // $supplier = Supplier::findOrFail(Supplier $supplier);
         
         return view('suppliers.show', compact('supplier'));
     }
 
-    public function edit($id)
+    public function edit(Supplier $supplier)
     {
-        $supplier = Supplier::findOrFail($id);
+        // $supplier = Supplier::findOrFail(Supplier $supplier);
         
         return view('suppliers.edit', compact('supplier'));
     }

@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Warehouse;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Models\Warehouse\Category;
 use App\Models\Ingredient;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Models\Warehouse\Category;
+use App\Http\Controllers\Controller;
 
 class CategoryController extends Controller
 {
@@ -23,26 +24,28 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:255|unique:categories,name',
             'description' => 'nullable|string',
         ]);
         
-        Category::create($request->all());
+        Category::create($validated);
         
         return redirect()->route('categories.index')->with('success', 'Kategori berhasil dibuat.');
     }
 
-    public function show($id)
+    public function show(Category $category)
     {
-        $category = Category::findOrFail($id);
+        // $category = Category::findOrFail($id);
+
+        // dd($category->toArray());
         
         return view('inventory.categories.show', compact('category'));
     }
 
-    public function edit($id)
+    public function edit(Category $category)
     {
-        $category = Category::findOrFail($id);
+        // $category = Category::findOrFail($id);
         
         return view('inventory.categories.edit', compact('category'));
     }

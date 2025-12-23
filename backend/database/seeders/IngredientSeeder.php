@@ -16,6 +16,7 @@ class IngredientSeeder extends Seeder
             // === Kategori 1: Daging & Ikan ===
             [
                 'name' => 'Daging Sapi Segar',
+                'slug' => 'daging-sapi-segar',
                 'unit_id' => 1,
                 'category_id' => 1,
                 'supplier_id' => 1,
@@ -25,6 +26,7 @@ class IngredientSeeder extends Seeder
             ],
             [
                 'name' => 'Daging Ayam Fillet',
+                'slug' => 'daging-ayam-fillet',
                 'unit_id' => 1,
                 'category_id' => 1,
                 'supplier_id' => 2,
@@ -34,6 +36,7 @@ class IngredientSeeder extends Seeder
             ],
             [
                 'name' => 'Ikan Kembung',
+                'slug' => 'ikan-kembung',
                 'unit_id' => 1,
                 'category_id' => 1,
                 'supplier_id' => 3,
@@ -43,6 +46,7 @@ class IngredientSeeder extends Seeder
             ],
             [
                 'name' => 'Udang Kupas',
+                'slug' => 'udang-kupas',
                 'unit_id' => 1,
                 'category_id' => 1,
                 'supplier_id' => 4,
@@ -52,6 +56,7 @@ class IngredientSeeder extends Seeder
             ],
             [
                 'name' => 'Daging Cincang',
+                'slug' => 'daging-cincang',
                 'unit_id' => 1,
                 'category_id' => 1,
                 'supplier_id' => 5,
@@ -63,6 +68,7 @@ class IngredientSeeder extends Seeder
             // === Kategori 2: Sayuran ===
             [
                 'name' => 'Wortel',
+                'slug' => 'wortel',
                 'unit_id' => 1,
                 'category_id' => 2,
                 'supplier_id' => 6,
@@ -72,6 +78,7 @@ class IngredientSeeder extends Seeder
             ],
             [
                 'name' => 'Brokoli',
+                'slug' => 'brokoli',
                 'unit_id' => 1,
                 'category_id' => 2,
                 'supplier_id' => 7,
@@ -81,6 +88,7 @@ class IngredientSeeder extends Seeder
             ],
             [
                 'name' => 'Kacang Panjang',
+                'slug' => 'kacang-panjang',
                 'unit_id' => 1,
                 'category_id' => 2,
                 'supplier_id' => 8,
@@ -90,6 +98,7 @@ class IngredientSeeder extends Seeder
             ],
             [
                 'name' => 'Bayam',
+                'slug' => 'bayam',
                 'unit_id' => 1,
                 'category_id' => 2,
                 'supplier_id' => 9,
@@ -99,6 +108,7 @@ class IngredientSeeder extends Seeder
             ],
             [
                 'name' => 'Bawang Daun',
+                'slug' => 'bawang-daun',
                 'unit_id' => 1,
                 'category_id' => 2,
                 'supplier_id' => 10,
@@ -110,6 +120,7 @@ class IngredientSeeder extends Seeder
             // === Kategori 3: Bumbu ===
             [
                 'name' => 'Bawang Merah',
+                'slug' => 'bawang-merah',
                 'unit_id' => 1,
                 'category_id' => 3,
                 'supplier_id' => 1,
@@ -119,6 +130,7 @@ class IngredientSeeder extends Seeder
             ],
             [
                 'name' => 'Bawang Putih',
+                'slug' => 'bawang-putih',
                 'unit_id' => 1,
                 'category_id' => 3,
                 'supplier_id' => 2,
@@ -128,6 +140,7 @@ class IngredientSeeder extends Seeder
             ],
             [
                 'name' => 'Cabe Merah',
+                'slug' => 'cabe-merah',
                 'unit_id' => 1,
                 'category_id' => 3,
                 'supplier_id' => 3,
@@ -137,6 +150,7 @@ class IngredientSeeder extends Seeder
             ],
             [
                 'name' => 'Lengkuas',
+                'slug' => 'lengkuas',
                 'unit_id' => 1,
                 'category_id' => 3,
                 'supplier_id' => 4,
@@ -146,6 +160,7 @@ class IngredientSeeder extends Seeder
             ],
             [
                 'name' => 'Jahe',
+                'slug' => 'jahe',
                 'unit_id' => 1,
                 'category_id' => 3,
                 'supplier_id' => 5,
@@ -155,6 +170,7 @@ class IngredientSeeder extends Seeder
             ],
             [
                 'name' => 'Kunyit',
+                'slug' => 'kunyit',
                 'unit_id' => 1,
                 'category_id' => 3,
                 'supplier_id' => 6,
@@ -166,6 +182,7 @@ class IngredientSeeder extends Seeder
             // === Kategori 4: Minuman ===
             [
                 'name' => 'Susu Cair',
+                'slug' => 'susu-cair',
                 'unit_id' => 2,
                 'category_id' => 4,
                 'supplier_id' => 7,
@@ -175,6 +192,7 @@ class IngredientSeeder extends Seeder
             ],
             [
                 'name' => 'Sirup Rasa Melon',
+                'slug' => 'sirup-melon',
                 'unit_id' => 2,
                 'category_id' => 4,
                 'supplier_id' => 8,
@@ -184,6 +202,7 @@ class IngredientSeeder extends Seeder
             ],
             [
                 'name' => 'Kopi Bubuk',
+                'slug' => 'kopi-bubuk',
                 'unit_id' => 3,
                 'category_id' => 4,
                 'supplier_id' => 9,
@@ -193,6 +212,7 @@ class IngredientSeeder extends Seeder
             ],
             [
                 'name' => 'Teh Celup',
+                'slug' => 'teh-celup',
                 'unit_id' => 4,
                 'category_id' => 4,
                 'supplier_id' => 10,
@@ -202,6 +222,7 @@ class IngredientSeeder extends Seeder
             ],
             [
                 'name' => 'Gula Cair',
+                'slug' => 'gula-cair',
                 'unit_id' => 2,
                 'category_id' => 4,
                 'supplier_id' => 1,
@@ -213,6 +234,7 @@ class IngredientSeeder extends Seeder
             // === Kategori 5: Bahan Pokok ===
             [
                 'name' => 'Beras Premium',
+                'slug' => 'beras-premium',
                 'unit_id' => 1,
                 'category_id' => 5,
                 'supplier_id' => 2,
@@ -222,6 +244,7 @@ class IngredientSeeder extends Seeder
             ],
             [
                 'name' => 'Gula Pasir',
+                'slug' => 'gula-pasir',
                 'unit_id' => 1,
                 'category_id' => 5,
                 'supplier_id' => 3,
@@ -231,6 +254,7 @@ class IngredientSeeder extends Seeder
             ],
             [
                 'name' => 'Minyak Goreng',
+                'slug' => 'minyak-goreng',
                 'unit_id' => 2,
                 'category_id' => 5,
                 'supplier_id' => 4,
@@ -240,6 +264,7 @@ class IngredientSeeder extends Seeder
             ],
             [
                 'name' => 'Tepung Terigu',
+                'slug' => 'tepung-terigu',
                 'unit_id' => 1,
                 'category_id' => 5,
                 'supplier_id' => 5,
@@ -249,6 +274,7 @@ class IngredientSeeder extends Seeder
             ],
             [
                 'name' => 'Garam Halus',
+                'slug' => 'garam-halus',
                 'unit_id' => 1,
                 'category_id' => 5,
                 'supplier_id' => 6,

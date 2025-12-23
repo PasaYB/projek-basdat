@@ -48,10 +48,10 @@
                                         <td>{{ $material_in->quantity }} {{ $material_in->ingredient->unit->code }}</td>
                                         <td>{{ \Carbon\Carbon::parse($material_in->in_date)->format('d F Y') }}</td>
                                         <td>
-                                            <a href="{{ route('material_ins.show', $material_in->id) }}" class="btn btn-secondary btn-sm">
+                                            <a href="{{ route('material_ins.show', $material_in->slug) }}" class="btn btn-secondary btn-sm">
                                                 <i class="fas fa-eye"></i>
                                             </a>
-                                            <a href="{{ route('material_ins.edit', $material_in->id) }}" class="btn btn-info btn-sm">
+                                            <a href="{{ route('material_ins.edit', $material_in->slug) }}" class="btn btn-info btn-sm">
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                             <form action="{{ route('material_ins.destroy', $material_in->id) }}" method="POST" style="display:inline;" class="delete-form">

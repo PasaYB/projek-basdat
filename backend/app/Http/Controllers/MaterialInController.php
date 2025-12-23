@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Supplier;
 use App\Models\Ingredient;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Warehouse\Material;
 use Illuminate\Support\Facades\DB;
@@ -80,17 +81,17 @@ class MaterialInController extends Controller
 
     }
 
-    public function show($id)
+    public function show(MaterialIn $material_in)
     {
-        $material_in = MaterialIn::findOrFail($id);
+        // $material_in = MaterialIn::findOrFail(MaterialIn $material_in);
         
         return view('distribution.material_ins.show', compact('material_in'));
     }
 
-    public function edit($id)
+    public function edit(MaterialIn $material_in)
     {
         $ingredients = Ingredient::with('supplier', 'unit')->get();
-        $material_in = MaterialIn::findOrFail($id);
+        // $material_in = MaterialIn::findOrFail(MaterialIn $material_in);
         
         return view('distribution.material_ins.edit', compact('material_in', 'ingredients'));
     }
