@@ -112,8 +112,8 @@ php artisan serve
       margin:20px 0;
       border-radius:4px;
     ">
-    <strong>Status Revisi:</strong> 🔧 <em>Done</em>
-    <strong>Fitur Selanjutnya:</strong> <em>Slug URL, Stock record tracking details</em>
+    <strong>Status Revisi:</strong> 🔧 <em>Done</em> <br>
+    <strong>Fitur Selanjutnya:</strong> ⚙️ <em>Slug URL, Stock record tracking details</em>
   </div>
 
   <hr>
