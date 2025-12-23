@@ -44,7 +44,7 @@
                                         <td>{{ $unit->code }}</td>
                                         <td>{{ $unit->name }}</td>
                                         <td>
-                                            <a href="{{ route('units.edit', $unit->id) }}" class="btn btn-info btn-sm">
+                                            <a href="{{ route('units.edit', $unit->slug) }}" class="btn btn-info btn-sm">
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                             <form action="{{ route('units.destroy', $unit->id) }}" method="POST" style="display:inline;" class="delete-form">

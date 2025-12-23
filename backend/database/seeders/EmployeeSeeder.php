@@ -16,27 +16,32 @@ class EmployeeSeeder extends Seeder
 
         Employee::create([
             'name' => 'pasa',
+            'slug' => 'pasa',
             'password' => bcrypt('123'),
             'address' => 'Sleman'        
         ]);
         
         Employee::create([
             'name' => 'belvan',
+            'slug' => 'belvan',
             'password' => bcrypt('123'),        
         ]);
         
         Employee::create([
             'name' => 'marsel',
+            'slug' => 'marsel',
             'password' => bcrypt('123'),        
         ]);
 
         Employee::create([
             'name' => 'fano',
+            'slug' => 'fano',
             'password' => bcrypt('123'),        
         ]);
 
         Employee::create([
             'name' => 'laras',
+            'slug' => 'laras',
             'password' => bcrypt('123'),        
         ]);
     }

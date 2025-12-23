@@ -13,5 +13,20 @@ class Unit extends Model
     protected $fillable = [
         'code',
         'name',
+        'slug'
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($unit) {
+            $unit->slug = Str::slug($unit->name, '-');
+        });
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }

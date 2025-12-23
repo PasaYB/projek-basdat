@@ -17,24 +17,28 @@ class UnitSeeder extends Seeder
             [
                 'code' => 'kg',
                 'name' => 'Kilogram',
+                'slug' => 'kilogram',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'code' => 'l',
                 'name' => 'Liter',
+                'slug' => 'liter',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'code' => 'g',
                 'name' => 'Gram',
+                'slug' => 'gram',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'code' => 'box',
                 'name' => 'Kotak',
+                'slug' => 'kotak',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

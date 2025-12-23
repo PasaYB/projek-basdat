@@ -34,6 +34,7 @@ Route::middleware(['auth:employee'])->group(function () {
         Route::resource('categories', CategoryController::class);
         Route::resource('units', UnitController::class);
         Route::resource('ingredients', IngredientController::class);
+        // Route::get('ingredients/{category}/{ingredient}', [IngredientController::class, 'show'])->name('ingredients.show');
         Route::resource('materials', MaterialController::class);
         Route::get('materials/stock-records/{id}', [MaterialController::class, 'stockRecords'])->name('materials.stock_records');
     });
