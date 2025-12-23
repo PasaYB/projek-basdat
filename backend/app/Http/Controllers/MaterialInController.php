@@ -65,6 +65,17 @@ class MaterialInController extends Controller
             $material->save();
         });
 
+        $material = Material::where('ingredient_id', $validated['ingredient_id'])->first();
+
+        // log stock record
+        DB::table('stock_records')->insert([
+            'material_id' => $material->id,
+            'stock' => $material->quantity,
+            'recorded_at' => $validated['in_date'],
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
         return redirect()->route('material_ins.index')->with('success', 'Data Bahan Masuk berhasil disimpan.');
 
     }
@@ -117,6 +128,17 @@ class MaterialInController extends Controller
             $material->status = $material->quantity > 0 ? 'available' : 'unavailable';
             $material->save();
         });
+
+        $material = Material::where('ingredient_id', $validated['ingredient_id'])->first();
+
+        // log stock record
+        DB::table('stock_records')->insert([
+            'material_id' => $material->id,
+            'stock' => $material->quantity,
+            'recorded_at' => $validated['in_date'],
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
         return redirect()->route('material_ins.index')->with('success', 'Data Bahan Masuk berhasil diperbarui.');
     }
     
@@ -130,22 +152,39 @@ class MaterialInController extends Controller
                 ->with('error', 'Tidak dapat menghapus data bahan masuk. Bahan ini sudah memiliki riwayat pengeluaran.');
         }
 
-        DB::transaction(function () use ($material_in) {
-            $material = Material::where('ingredient_id', $material_in->ingredient_id)->first();
+        $newQuantity = null;
+
+        DB::transaction(function () use ($material_in, &$newQuantity) {
+            $material = Material::where('ingredient_id', $material_in->ingredient_id)
+                ->lockForUpdate()
+                ->first();
 
             if ($material) {
-                $material->quantity -= $material_in->quantity;
+                $newQuantity = $material->quantity - $material_in->quantity;
 
-                if ($material->quantity <= 0) {
-                    $material->quantity = 0;
+                if ($newQuantity <= 0) {
+                    $newQuantity = 0;
                     $material->status = 'unavailable';
                 }
 
+                $material->quantity = $newQuantity;
                 $material->save();
             }
 
             $material_in->delete();
-        });        
+        });  
+
+        $material = Material::where('ingredient_id', $material_in->ingredient_id)->first();
+
+        // log stock record
+        DB::table('stock_records')->insert([
+            'material_id' => $material->id,
+            'stock' => $newQuantity,
+            'recorded_at' => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
         return redirect()->route('material_ins.index')->with('success', 'Data Bahan Masuk berhasil dihapus.');
     }
 }

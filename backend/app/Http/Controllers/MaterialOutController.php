@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Warehouse\Material;
+use Illuminate\Support\Facades\DB;
 use App\Models\Warehouse\MaterialIn;
 use App\Models\Warehouse\MaterialOut;
 
@@ -77,6 +78,15 @@ class MaterialOutController extends Controller
 
         $material->save();
 
+        // log stock record
+        DB::table('stock_records')->insert([
+            'material_id' => $material->id,
+            'stock' => $material->quantity,
+            'recorded_at' => $validated['out_date'],
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
         return redirect()->route('material_outs.index')->with('success', 'Data Bahan Keluar berhasil disimpan.');
     }
 
@@ -134,6 +144,7 @@ class MaterialOutController extends Controller
         // Get the new material
         $newMaterial = Material::where('ingredient_id', $validated['ingredient_id'])->first();
 
+        // dd($newMaterial->toArray());
         if (!$newMaterial) {
             return back()->withErrors([
                 'ingredient_id' => 'Material tidak ditemukan.'
@@ -166,6 +177,15 @@ class MaterialOutController extends Controller
         }
         $newMaterial->save();
 
+        // log stock record
+        DB::table('stock_records')->insert([
+            'material_id' => $newMaterial->id,
+            'stock' => $newMaterial->quantity,
+            'recorded_at' => $validated['out_date'],
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
         return redirect()->route('material_outs.index')->with('success', 'Data Bahan Keluar berhasil diperbarui.');
     }
 
@@ -174,15 +194,26 @@ class MaterialOutController extends Controller
         $material_out = MaterialOut::findOrFail($id);
         
         $material = Material::where('ingredient_id', $material_out->ingredient_id)->first();
+
         if ($material) {
-            $material->quantity += $material_out->quantity;
-            if ($material->quantity > 0) {
+           $newQty = $material->quantity + $material_out->quantity;
+            if ($newQty > 0) {
                 $material->status = 'available';
             }
+            $material->quantity = $newQty;
             $material->save();
         }
         
         $material_out->delete();
+
+        // log stock record
+        DB::table('stock_records')->insert([
+            'material_id' => $material->id,
+            'stock' => $newQty,
+            'recorded_at' => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
         
         return redirect()->route('material_outs.index')->with('success', 'Data Bahan Keluar berhasil dihapus.');
     }

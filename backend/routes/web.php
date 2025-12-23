@@ -35,6 +35,7 @@ Route::middleware(['auth:employee'])->group(function () {
         Route::resource('units', UnitController::class);
         Route::resource('ingredients', IngredientController::class);
         Route::resource('materials', MaterialController::class);
+        Route::get('materials/stock-records/{id}', [MaterialController::class, 'stockRecords'])->name('materials.stock_records');
     });
 
     Route::prefix('distribution')->group(function () {
@@ -42,4 +43,7 @@ Route::middleware(['auth:employee'])->group(function () {
         Route::resource('material_ins', MaterialInController::class);
         Route::resource('material_outs', MaterialOutController::class);
     });
+
+
+    //slug
 });

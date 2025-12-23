@@ -112,7 +112,8 @@ php artisan serve
       margin:20px 0;
       border-radius:4px;
     ">
-    <strong>Status Revisi:</strong> 🔧 <em>Dalam proses — fitur tracking stok akan diperbarui pada versi selanjutnya.</em>
+    <strong>Status Revisi:</strong> 🔧 <em>Done</em>
+    <strong>Fitur Selanjutnya:</strong> <em>Slug URL, Stock record tracking details</em>
   </div>
 
   <hr>

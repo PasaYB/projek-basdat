@@ -6,7 +6,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Manajemen Bahan Gudang</h1>
+                <h1>Manajemen Stok Bahan Gudang</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -25,46 +25,24 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Daftar Bahan Gudang</h3>
+                            <h3 class="card-title">Riwayat Stok {{ $stockRecords->first()->material->ingredient->name }}</h3>
                         </div>
                         <div class="card-body">
                             <table id="example2" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Kategori</th>   
-                                        <th>Nama Bahan</th>
                                         <th>Stok</th>
-                                        <th>Status</th>
+                                        <th>Tanggal</th>
+                                        {{-- log stock detail --}}
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($materials as $material)
-                                    <tr>
+                                    @foreach($stockRecords as $stockRecord)
+                                    <d('recordtr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $material->ingredient->category->name }}</td>
-                                        <td>{{ $material->ingredient->name }}</td>
-                                            <td>
-                                                <a href="{{ route('materials.stock_records', $material->id) }}">
-                                                    {{ $material->quantity }} {{ $material->ingredient->unit->code }}
-                                                </a>
-                                            </td>
-                                        <td><span class="badge {{ $material->status == 'available' ? 'badge-success' : 'badge-danger' }}">{{ $material->status }}</span></td>                                        {{-- <td>{{ $material->created_at->format('M d, Y') }}</td> --}}
-                                        {{-- <td>
-                                            <a href="{{ route('categories.show', $material->id) }}" class="btn btn-secondary btn-sm">
-                                                <i class="fas fa-eye"></i>
-                                            </a>
-                                            <a href="{{ route('categories.edit', $material->id) }}" class="btn btn-info btn-sm">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-                                            <form action="{{ route('categories.destroy', $material->id) }}" method="POST" style="display:inline;" class="delete-form">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="button" class="btn btn-danger btn-sm delete-btn">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </form>
-                                        </td> --}}
+                                        <td>{{ $stockRecord->stock }} {{ $stockRecord->material->ingredient->unit->code }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($stockRecord->recorded_at)->format('d F Y') }}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -156,7 +134,7 @@
             ],
             language: {
                 search: "_INPUT_",
-                searchPlaceholder: "Search kategori..."
+                searchPlaceholder: "Search data..."
             }
         });
 
