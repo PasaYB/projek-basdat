@@ -33,18 +33,48 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Stok</th>
+                                        <th>Detail</th>
                                         <th>Tanggal</th>
                                         {{-- log stock detail --}}
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($stockRecords as $stockRecord)
-                                    <d('recordtr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $stockRecord->stock }} {{ $stockRecord->material->ingredient->unit->code }}</td>
-                                        <td>{{ \Carbon\Carbon::parse($stockRecord->recorded_at)->format('d F Y') }}</td>
-                                    </tr>
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $stockRecord->stock }} {{ $stockRecord->material->ingredient->unit->code }}
+                                                @if ($stockRecord->type === 'in')
+                                                    <span class="text-success">(+{{ $stockRecord->detailRecord->quantity }})</span>
+                                                @elseif ($stockRecord->type === 'out')
+                                                    <span class="text-danger">(-{{ $stockRecord->detailRecord->quantity }})</span>
+                                                @else
+                                                    <span class="text-warning">
+                                                        @if ($stockRecord->adjustDetailRecord->qty_after - $stockRecord->adjustDetailRecord->qty_before < 0)
+                                                            ({{ $stockRecord->adjustDetailRecord->qty_after - $stockRecord->adjustDetailRecord->qty_before }})
+                                                        @else
+                                                            (+{{ $stockRecord->adjustDetailRecord->qty_after - $stockRecord->adjustDetailRecord->qty_before }})
+                                                        @endif
+                                                    </span>
+                                                @endif                                            
+                                            </td>
+                                            <td>
+                                                @if ($stockRecord->type === 'in')
+                                                    <a href="{{ route('material_ins.show', $stockRecord->slug) }}">
+                                                        {{ $stockRecord->slug }}
+                                                    </a>                                                
+                                                @elseif ($stockRecord->type === 'out')
+                                                    <a href="{{ route('material_outs.show', $stockRecord->slug) }}">
+                                                        {{ $stockRecord->slug }}
+                                                    </a>                                                  
+                                                @elseif($stockRecord->type === 'adjustment')
+                                                    Adjustment: {{ ucfirst($stockRecord->adjustDetailRecord->adjustment_type) }} {{ $stockRecord->slug }} 
+                                                @endif  
+                                            </td>
+                                            <td>{{ \Carbon\Carbon::parse($stockRecord->recorded_at)->format('d F Y') }}</td>
+                                        </tr>
                                     @endforeach
+
+                                    {{-- TO DO: add qty_before and after in every in or out transaction --}}
                                 </tbody>
                             </table>
                         </div>

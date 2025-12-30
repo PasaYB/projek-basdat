@@ -60,12 +60,16 @@
                 
                 <div class="card card-navy">
                     <div class="card-body">
+                        @if ($material_in->trashed())
+                            <span class="text-danger">This data is already deleted!</span>
+                        @else
                         <a href="{{ route('material_ins.index') }}" class="btn btn-secondary">
                             <i class="fas fa-arrow-left"></i>
                         </a>
                         <a href="{{ route('material_ins.edit', $material_in->id) }}" class="btn btn-warning">
                             <i class="fas fa-edit"></i>
                         </a>
+                        @endif
                     </div>
                 </div>
             </div>

@@ -13,8 +13,6 @@ class MaterialOutController extends Controller
     public function index()
     {
         $material_outs = MaterialOut::with('ingredient')->get();
-
-        // dd($material_outs);
         
         return view('distribution.material_outs.index', compact('material_outs'));
     }
@@ -68,8 +66,9 @@ class MaterialOutController extends Controller
             ])->withInput();
         }
 
-        MaterialOut::create($validated);
+        $out = MaterialOut::create($validated);
 
+        // dd($out->toArray());
         $material->quantity -= $validated['quantity'];
 
         if ($material->quantity <= 0) {
@@ -81,6 +80,8 @@ class MaterialOutController extends Controller
         // log stock record
         DB::table('stock_records')->insert([
             'material_id' => $material->id,
+            'type' => 'out',
+            'slug' => $out->slug,
             'stock' => $material->quantity,
             'recorded_at' => $validated['out_date'],
             'created_at' => now(),
@@ -90,9 +91,9 @@ class MaterialOutController extends Controller
         return redirect()->route('material_outs.index')->with('success', 'Data Bahan Keluar berhasil disimpan.');
     }
 
-    public function show(MaterialOut $material_out)
+    public function show($slug)
     {
-        // $material_out = MaterialOut::with('ingredient')->findOrFail($id);
+        $material_out = MaterialOut::withTrashed()->where('slug', $slug)->firstOrFail();
         
         return view('distribution.material_outs.show', compact('material_out'));
     }
@@ -118,6 +119,8 @@ class MaterialOutController extends Controller
     public function update(Request $request, $id)
     {
         $material_out = MaterialOut::findOrFail($id);
+
+        $oldQty = $material_out->quantity;
         
         $validated = $request->validate([
             'ingredient_id' => 'required|exists:ingredients,id',
@@ -176,10 +179,23 @@ class MaterialOutController extends Controller
         $newMaterial->save();
 
         // log stock record
-        DB::table('stock_records')->insert([
+        $stockRecordId = DB::table('stock_records')->insertGetId([
             'material_id' => $newMaterial->id,
             'stock' => $newMaterial->quantity,
+            'type' => 'adjustment',
+            'slug' => $material_out->slug,
             'recorded_at' => $validated['out_date'],
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        // adjustment stock record
+        DB::table('adjustment_details')->insert([
+            'stock_record_id' => $stockRecordId,
+            'adjustment_type' => 'update',
+            'qty_before' => $oldQty,
+            'qty_after' => $newMaterial->quantity,
+            'adjusted_by' => auth()->id(),
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -193,6 +209,8 @@ class MaterialOutController extends Controller
         
         $material = Material::where('ingredient_id', $material_out->ingredient_id)->first();
 
+        $oldQty = $material_out->quantity;
+
         if ($material) {
            $newQty = $material->quantity + $material_out->quantity;
             if ($newQty > 0) {
@@ -201,14 +219,27 @@ class MaterialOutController extends Controller
             $material->quantity = $newQty;
             $material->save();
         }
-        
-        $material_out->delete();
 
+        $material_out->delete();
+        
         // log stock record
-        DB::table('stock_records')->insert([
+        $stockRecordId = DB::table('stock_records')->insertGetId([
             'material_id' => $material->id,
             'stock' => $newQty,
+            'slug' => $material_out->slug,
+            'type' => 'adjustment',
             'recorded_at' => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        // adjustment stock record
+        DB::table('adjustment_details')->insert([
+            'stock_record_id' => $stockRecordId,
+            'adjustment_type' => 'delete',
+            'qty_before' => 0,
+            'qty_after' => $oldQty,
+            'adjusted_by' => auth()->id(),
             'created_at' => now(),
             'updated_at' => now(),
         ]);
