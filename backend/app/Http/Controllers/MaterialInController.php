@@ -50,8 +50,9 @@ class MaterialInController extends Controller
         $validated['total_price'] = $ingredient->price_per_unit * $validated['quantity'];
 
         // transaction
-        DB::transaction(function () use ($validated) {
+        DB::transaction(function () use ($validated, &$in) {
             $in = MaterialIn::create($validated);
+            // dd($in->toArray());
 
             // find or make new
             $material = Material::firstOrNew([
@@ -66,11 +67,16 @@ class MaterialInController extends Controller
             $material->save();
         });
 
-        $material = Material::where('ingredient_id', $validated['ingredient_id'])->first();
+        $latestSlug = $in->slug;
+
+        $material = Material::where('ingredient_id', $validated['ingredient_id'])->first();        
+        // dd($in->toArray());
 
         // log stock record
         DB::table('stock_records')->insert([
             'material_id' => $material->id,
+            'type' => 'in',
+            'slug' => $latestSlug,
             'stock' => $material->quantity,
             'recorded_at' => $validated['in_date'],
             'created_at' => now(),
@@ -81,9 +87,9 @@ class MaterialInController extends Controller
 
     }
 
-    public function show(MaterialIn $material_in)
+    public function show($slug)
     {
-        // $material_in = MaterialIn::findOrFail(MaterialIn $material_in);
+        $material_in = MaterialIn::withTrashed()->where('slug', $slug)->firstOrFail();
         
         return view('distribution.material_ins.show', compact('material_in'));
     }
@@ -98,7 +104,7 @@ class MaterialInController extends Controller
 
     public function update(Request $request, $id)
     {
-        $in = MaterialIn::findOrFail($id);
+        $in = MaterialIn::findOrFail($id);        
         
         $validated = $request->validate([
             'ingredient_id' => 'required|exists:ingredients,id',
@@ -106,6 +112,9 @@ class MaterialInController extends Controller
             'in_date' => 'required|date',
             'note' => 'nullable|string',
         ]);
+        
+        $oldQty = $in->quantity;
+        $newQty = $validated['quantity'];
 
         $validated['created_by'] = auth()->id();
         
@@ -133,13 +142,27 @@ class MaterialInController extends Controller
         $material = Material::where('ingredient_id', $validated['ingredient_id'])->first();
 
         // log stock record
-        DB::table('stock_records')->insert([
+        $stockRecordId = DB::table('stock_records')->insertGetId([
             'material_id' => $material->id,
             'stock' => $material->quantity,
+            'type' => 'adjustment',
+            'slug' => $in->slug,
             'recorded_at' => $validated['in_date'],
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
+        // adjustment stock record
+        DB::table('adjustment_details')->insert([
+            'stock_record_id' => $stockRecordId,
+            'adjustment_type' => 'update',
+            'qty_before' => $oldQty,
+            'qty_after' => $newQty,
+            'adjusted_by' => auth()->id(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
         return redirect()->route('material_ins.index')->with('success', 'Data Bahan Masuk berhasil diperbarui.');
     }
     
@@ -153,7 +176,9 @@ class MaterialInController extends Controller
                 ->with('error', 'Tidak dapat menghapus data bahan masuk. Bahan ini sudah memiliki riwayat pengeluaran.');
         }
 
+        $oldQty = $material_in->quantity;
         $newQuantity = null;
+        $latestSlug = $material_in->slug;
 
         DB::transaction(function () use ($material_in, &$newQuantity) {
             $material = Material::where('ingredient_id', $material_in->ingredient_id)
@@ -178,10 +203,23 @@ class MaterialInController extends Controller
         $material = Material::where('ingredient_id', $material_in->ingredient_id)->first();
 
         // log stock record
-        DB::table('stock_records')->insert([
+        $stockRecordId = DB::table('stock_records')->insertGetId([
             'material_id' => $material->id,
+            'slug' => $latestSlug,
             'stock' => $newQuantity,
+            'type' => 'adjustment',
             'recorded_at' => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        // adjustment stock record
+        DB::table('adjustment_details')->insert([
+            'stock_record_id' => $stockRecordId,
+            'adjustment_type' => 'delete',
+            'qty_before' => $oldQty,
+            'qty_after' => 0,
+            'adjusted_by' => auth()->id(),
             'created_at' => now(),
             'updated_at' => now(),
         ]);

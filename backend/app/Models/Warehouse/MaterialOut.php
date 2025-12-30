@@ -6,12 +6,14 @@ use App\Models\Employee;
 use App\Models\Ingredient;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class MaterialOut extends Model
 {
     /** @use HasFactory<\Database\Factories\\Warehouse\MaterialOutFactory> */
     use HasFactory;
+    use SoftDeletes;
 
     protected $fillable = [
         'ingredient_id',
